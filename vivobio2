@@ -1,0 +1,62 @@
+package automation;
+import java.util.List;
+import java.util.Random;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import testng.NewTest;
+public class testing {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "D:\\Softwares\\selenium\\chrome-113\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize(); // maximize the window
+		driver.get("https://vivobiouat.virinchihospitals.com/vivobiouat/#/home");
+		Thread.sleep(3000);
+		WebElement loginusr = driver.findElement(By.id("mat-input-0"));
+		loginusr.sendKeys("4032");
+		Thread.sleep(3000);
+		WebElement loginpasswd = driver.findElement(By.id("password"));
+		loginpasswd.sendKeys("test123");
+		Thread.sleep(3000);
+		driver.findElement(By.id("login")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("module4")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("indentImg")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("pr-number-date-1")).click();
+		Thread.sleep(3000);
+		
+		
+		WebElement indentid = driver.findElement(By.id("mat-input-16"));
+		String enteredText = indentid.getAttribute("value");
+		System.out.println("number=" +enteredText);
+for (int i=1;i<=3;i++){
+	
+
+		WebElement reqqty = driver.findElement(By.id("item-req-qty-"+i));
+		double reqqtyvalue = Double.valueOf(reqqty.getAttribute("value"));
+		System.out.println("number=" +reqqtyvalue);
+
+		Random random = new Random();
+		WebElement appqty = driver.findElement(By.id("item-approved-qty-"+i));
+		appqty.clear();
+		double approvedqty = new Random().nextDouble() * reqqtyvalue;
+//		int approvedqty=random.nextInt((int) reqqtyvalue); 
+		appqty.sendKeys(String.valueOf(approvedqty));
+		//System.out.println("number=" +approvedqty);
+		System.out.println("number=" +String.format("%.2f", approvedqty));
+		Thread.sleep(5000);	
+		
+}
+		
+		
+		
+		
+		
+
+	}
+
+}
