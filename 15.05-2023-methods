@@ -1,0 +1,811 @@
+package automation;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+public class IndentCheck {
+	
+	public void indentChecking(WebDriver driver) throws InterruptedException {
+		for (int i = 0; i < 1; i++) {
+			indentInserting(driver);
+			Thread.sleep(3000);
+			System.out.println("on loop no.:"+i);
+		}
+		System.out.println("out of loop");
+		
+
+	}
+
+	public void indentInserting(WebDriver driver) throws InterruptedException {
+		driver.findElement(By.id("expected-delivery-date")).click();
+		Thread.sleep(3000);
+		WebElement calendardate = driver.findElement(By.xpath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[5]/td[7]/button/div[1]"));
+		calendardate.click();
+		
+		driver.findElement(By.id("indentPurposeId")).click();
+		Thread.sleep(3000);
+		List<WebElement> indenttype = driver.findElements(By.xpath("//*[@id='indentPurposeId-panel']//mat-option"));
+		Random random = new Random();
+		int index = random.nextInt(indenttype.size());
+		WebElement randomElement = indenttype.get(index);
+		String indenttypeid = randomElement.getAttribute("id");
+		randomElement.click();
+
+		List<WebElement> indentcatgory = driver.findElements(By.xpath("//*[@id='indent-category']//mat-radio-button"));
+		int index1 = random.nextInt(indentcatgory.size());
+		WebElement randomElement1 = indentcatgory.get(index1);
+		randomElement1.click();
+		String indentcatgoryid = randomElement1.getAttribute("id");
+	
+
+		if (indentcatgoryid.equals("indent-category-option-1")) {
+			driver.findElement(By.id("company-type")).click();
+			Thread.sleep(3000);
+			List<WebElement> companytype = driver.findElements(By.xpath("//*[@id='company-type-panel']//mat-option"));
+			int index3 = random.nextInt(companytype.size());
+			WebElement randomElement3 = companytype.get(index3);
+			randomElement3.click();
+			String companytypeid = randomElement3.getAttribute("id");
+			Thread.sleep(3000);
+
+			driver.findElement(By.id("customer-id")).click();
+			List<WebElement> selectcustomer = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+			int index5 = random.nextInt(selectcustomer.size());
+			WebElement randomElement5 = selectcustomer.get(index5);
+			randomElement5.click();
+			String selectcustomerid = randomElement5.getAttribute("id");
+			Thread.sleep(3000);
+
+			driver.findElement(By.id("project-id")).click();
+			List<WebElement> projecttype = driver.findElements(By.xpath("//*[@id='project-id-panel']//mat-option"));
+			Thread.sleep(3000);
+			int index7 = random.nextInt(projecttype.size());
+			WebElement randomElement7 = projecttype.get(index7);
+			String projecttypeid = randomElement7.getAttribute("id");
+			randomElement7.click();
+			Thread.sleep(3000);
+
+			driver.findElement(By.id("study-list")).click();
+			List<WebElement> studylist = driver.findElements(By.xpath("//*[@id='study-list-panel']//mat-option"));
+			//int index9 = random.nextInt(studylist.size());
+			WebElement randomElement9 = studylist.get(random.nextInt(studylist.size()));
+			randomElement9.click();
+			String studylistid = randomElement9.getAttribute("id");
+			Thread.sleep(3000);
+		}
+		Set<String> s = new HashSet<String>();
+
+		for (int i = 0; i < 4; i++) {
+			// driver.findElement(By.id("item-name")).click();
+			WebElement inputField = driver.findElement(By.id("item-name"));
+			inputField.sendKeys("a");
+			Thread.sleep(4000);
+			List<WebElement> itemname = driver.findElements(By.xpath(" 	//*[@id='mat-autocomplete-0']//mat-option"));
+			int indexitem = random.nextInt(itemname.size());
+			System.out.println(indexitem);
+
+			WebElement randomElementitem = itemname.get(indexitem);
+			String itemnames = randomElementitem.getText();
+			System.out.println(itemnames);
+			randomElementitem.click();
+
+			if (s.add(itemnames) == false) {
+				System.out.println("duplicate value :" + indexitem);
+				driver.findElement(By.id("reset-item-btn")).click();
+				i--;
+				continue;
+			}
+			s.add(itemnames);
+			double randomNumber = new Random().nextDouble() * 25.0;
+			WebElement itemqty = driver.findElement(By.id("item-request-quantity"));
+			itemqty.sendKeys(String.format("%.2f", randomNumber));
+
+			Thread.sleep(3000);
+			driver.findElement(By.id("save-item-btn")).click();
+			Thread.sleep(2000);
+			
+		}
+		System.out.println(s);
+		
+		WebElement Elementitem = driver.findElement(By.id("item-id-1"));
+		String itemnames1 = Elementitem.getText();
+		s.remove(itemnames1);
+		
+		driver.findElement(By.id("delete-item1")).click();
+		Thread.sleep(3000);
+		driver.switchTo().alert().accept();
+		Thread.sleep(3000);
+		System.out.println(s);
+		driver.findElement(By.id("edit-item1")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("reset-item-btn")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("edit-item1")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("item-request-quantity")).clear();
+		Thread.sleep(3000);
+		 double randomNumber1 = new Random().nextDouble() * 25.0;
+		 WebElement itemqty1 =driver.findElement(By.id("item-request-quantity"));
+		 itemqty1.sendKeys(String.format("%.2f",randomNumber1));
+//		WebElement itemqty1 = driver.findElement(By.id("item-request-quantity"));
+//		int randomNum1 = random.nextInt(20);
+//		itemqty1.sendKeys(Integer.toString(randomNum1));
+		driver.findElement(By.id("save-item-btn")).click();
+		Thread.sleep(4000);
+	
+		Thread.sleep(3000);
+		System.out.println(s);
+	}
+public void updateChecking(WebDriver driver) throws InterruptedException {
+
+		
+
+		for (int i = 0; i < 1; i++) {
+			try {
+			indentupdating(driver);
+			} catch (Exception e){
+				driver.findElement(By.id("reset-item-btn")).click();
+				Thread.sleep(3000);
+			}
+			Thread.sleep(3000);
+			System.out.println("on loop no.:"+i);
+		}
+		System.out.println("out of loop");
+		
+
+	}
+
+	public void indentupdating(WebDriver driver) throws InterruptedException {
+
+		driver.findElement(By.id("expected-delivery-date")).click();
+		Thread.sleep(3000);
+		WebElement calendardate = driver.findElement(By.xpath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[5]/td[7]/button/div[1]"));
+		calendardate.click();
+		Thread.sleep(3000);
+		
+		driver.findElement(By.id("indentPurposeId")).click();
+		Thread.sleep(3000);
+		List<WebElement> indenttype = driver.findElements(By.xpath("//*[@id='indentPurposeId-panel']//mat-option"));
+		Random random = new Random();
+				int index = random.nextInt(indenttype.size());
+		WebElement randomElement = indenttype.get(index);
+		String indenttypeid = randomElement.getAttribute("id");
+		randomElement.click();
+
+		List<WebElement> indentcatgory = driver.findElements(By.xpath("//*[@id='indent-category']//mat-radio-button"));
+		int index1 = random.nextInt(indentcatgory.size());
+		WebElement randomElement1 = indentcatgory.get(index1);
+		String indentcatgoryid = randomElement1.getAttribute("id");
+		randomElement1.click();
+
+		if (indentcatgoryid.equals("indent-category-option-1")) {
+			driver.findElement(By.id("company-type")).click();
+			Thread.sleep(3000);
+			List<WebElement> companytype = driver.findElements(By.xpath("//*[@id='company-type-panel']//mat-option"));
+			int index3 = random.nextInt(companytype.size());
+			WebElement randomElement3 = companytype.get(index3);
+			String companytypeid = randomElement3.getAttribute("id");
+			randomElement3.click();
+			Thread.sleep(3000);
+
+			driver.findElement(By.id("customer-id")).click();
+			List<WebElement> selectcustomer = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+			int index5 = random.nextInt(selectcustomer.size());
+			WebElement randomElement5 = selectcustomer.get(index5);
+			String selectcustomerid = randomElement5.getAttribute("id");
+			randomElement5.click();
+			Thread.sleep(3000);
+
+			driver.findElement(By.id("project-id")).click();
+			List<WebElement> projecttype = driver.findElements(By.xpath("//*[@id='project-id-panel']//mat-option"));
+			Thread.sleep(3000);
+			int index7 = random.nextInt(projecttype.size());
+			WebElement randomElement7 = projecttype.get(index7);
+			String projecttypeid = randomElement7.getAttribute("id");
+			randomElement7.click();
+			Thread.sleep(3000);
+
+			driver.findElement(By.id("study-list")).click();
+			List<WebElement> studylist = driver.findElements(By.xpath("//*[@id='study-list-panel']//mat-option"));
+			int index9 = random.nextInt(studylist.size());
+			WebElement randomElement9 = studylist.get(index9);
+			String studylistid = randomElement9.getAttribute("id");
+			randomElement9.click();
+			Thread.sleep(3000);
+		}
+		Set<String> s = new HashSet<String>();
+
+		for (int i = 0; i < 2; i++) {
+			// driver.findElement(By.id("item-name")).click();
+			WebElement inputField = driver.findElement(By.id("item-name"));
+			inputField.sendKeys("a");
+			Thread.sleep(4000);
+			List<WebElement> itemname = driver.findElements(By.xpath(" 	//*[@id='mat-autocomplete-0']//mat-option"));
+			int indexitem = random.nextInt(itemname.size());
+			System.out.println(indexitem);
+
+			WebElement randomElementitem = itemname.get(indexitem);
+			String itemnames = randomElementitem.getText();
+			System.out.println(itemnames);
+			randomElementitem.click();
+
+			if (s.add(itemnames) == false) {
+				System.out.println("duplicate value :" + indexitem);
+				driver.findElement(By.id("reset-item-btn")).click();
+				i--;
+				continue;
+			}
+			s.add(itemnames);
+			double randomNumber = new Random().nextDouble() * 25.0;
+			WebElement itemqty = driver.findElement(By.id("item-request-quantity"));
+			itemqty.sendKeys(String.format("%.2f", randomNumber));
+
+			// WebElement itemqty =
+			// driver.findElement(By.id("item-request-quantity"));
+			// int randomNum = random.nextInt(20);
+			// itemqty.sendKeys(Integer.toString(randomNum));
+			Thread.sleep(3000);
+			driver.findElement(By.id("save-item-btn")).click();
+			Thread.sleep(2000);
+			
+		}
+		System.out.println(s);
+		
+		WebElement Elementitem = driver.findElement(By.id("item-id-1"));
+		String itemnames1 = Elementitem.getText();
+		s.remove(itemnames1);
+		
+		driver.findElement(By.id("delete-item1")).click();
+		Thread.sleep(3000);
+		driver.switchTo().alert().accept();
+		Thread.sleep(3000);
+		System.out.println(s);
+		driver.findElement(By.id("edit-item1")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("reset-item-btn")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("edit-item1")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("item-request-quantity")).clear();
+		Thread.sleep(3000);
+		double randomNumber1 = new Random().nextDouble() * 25.0;
+		 WebElement itemqty1 =driver.findElement(By.id("item-request-quantity"));
+		 itemqty1.sendKeys(String.format("%.2f",randomNumber1));
+//		WebElement itemqty1 = driver.findElement(By.id("item-request-quantity"));
+//		int randomNum1 = random.nextInt(20);
+//		itemqty1.sendKeys(Integer.toString(randomNum1));
+		driver.findElement(By.id("save-item-btn")).click();
+		Thread.sleep(4000);
+		System.out.println(s);
+
+			
+		}
+	public void approvalqty (WebDriver driver) throws InterruptedException {
+		Random random=new Random();
+		testing1 t1 =new testing1();
+		driver.findElement(By.id("pr-number-date-1")).click();
+		Thread.sleep(3000);
+		
+	
+					for (int i=1;i<=3;i++){
+						WebElement reqqty = driver.findElement(By.id("item-req-qty-"+i));
+							double reqqtyvalue = Double.valueOf(reqqty.getAttribute("value"));
+								System.out.println("number=" +reqqtyvalue);
+									
+									
+									WebElement appqty = driver.findElement(By.id("item-approved-qty-"+i));
+									appqty.clear();
+									double approvedqty = new Random().nextDouble() * reqqtyvalue;
+									appqty.sendKeys(String.format("%.3f",approvedqty));
+						Thread.sleep(5000);	
+					}
+					for (int i=1;i<=3;i++){
+						driver.findElement(By.id("select-item-"+i)).click();	
+						Thread.sleep(3000);
+					}
+					WebElement indentid1= driver.findElement(By.id("indentPurposeId"));
+					String enteredText1 = indentid1.getText();		System.out.println("number=" +enteredText1);
+					driver.findElement(By.id("approve-btn")).click();	
+					Thread.sleep(3000);
+					driver.findElement(By.id("stores")).click();
+					Thread.sleep(3000);
+					 if (enteredText1.equals("In-house Usage")) {
+						 driver.findElement(By.id("itemIssuance")).click();	
+						 Thread.sleep(3000);
+						WebElement indentnumber = driver.findElement(By.id("indent-number"));
+							Actions a=new Actions(driver);
+							indentnumber.click();
+							a.keyDown(Keys.ENTER).click().perform();
+							
+							Thread.sleep(3000);
+							driver.findElement(By.id("reset-btn")).click();
+							Thread.sleep(3000);
+							singleitemisuuance(driver);
+							Thread.sleep(3000);
+							mutipleitemisuuance(driver);
+							
+							
+						 
+					 }else if (enteredText1.equals("External Sales")) {
+					    	Thread.sleep(3000);
+					    	
+							driver.findElement(By.id("customerIssuanceImg")).click();
+							Thread.sleep(3000);
+							WebElement indentnumber1 = driver.findElement(By.id("indent-number"));
+							Actions a1=new Actions(driver);
+							indentnumber1.click();
+							a1.keyDown(Keys.ENTER).click().perform();
+							
+							Thread.sleep(3000);
+							driver.findElement(By.id("reset-btn")).click();
+							Thread.sleep(3000);
+							singlecustomerisuuance(driver);
+							Thread.sleep(3000);
+							mutiplecustomerisuuance(driver);
+					 }
+					 }
+
+	public static void singleitemisuuance (WebDriver driver) throws InterruptedException {
+		for (int i=1; i<=3;i++){
+			WebElement indentnumber2 = driver.findElement(By.id("indent-number"));
+			Actions a2=new Actions(driver);
+			indentnumber2.click();
+			a2.keyDown(Keys.ENTER).click().perform();
+			Thread.sleep(2000);
+			
+			WebElement avaliblestockid = driver.findElement(By.id("item-stock-"+i));
+			String avaliableqty=avaliblestockid.getAttribute("value");
+			System.out.println(avaliableqty);
+	        Thread.sleep(2000);
+	        
+			WebElement Allocatedid = driver.findElement(By.id("item-allocated-qty-pr-"+i));
+			String Allocatedqty=Allocatedid.getAttribute("value");
+			System.out.println(Allocatedqty);
+			Thread.sleep(2000);
+			
+			WebElement ReqApprovedid = driver.findElement(By.id("item-req-approved-qty-"+i));
+			String ReqApprovedqty=ReqApprovedid.getAttribute("value");
+			System.out.println(ReqApprovedqty);
+			Thread.sleep(2000);
+			
+			WebElement ReqPendingid	 = driver.findElement(By.id("item-req-pending-qty-"+i));
+			String ReqPendingqty=ReqPendingid.getAttribute("value");
+			System.out.println(ReqPendingqty);
+			Thread.sleep(2000);
+       
+			double num1 =  Double.parseDouble(Allocatedqty);
+			double num2 =  Double.parseDouble(ReqApprovedqty);
+			double difference = num2 - num1; 
+			String result = String.valueOf(difference/2);
+			System.out.println(result);
+			 if (avaliableqty.equals("0")) {
+				 WebElement issueqty = driver.findElement(By.id("item-issue-qty-"+i));
+				 issueqty.clear();
+	   			issueqty.sendKeys(result);
+	   			Thread.sleep(2000);
+	   				driver.findElement(By.id("select-item-"+i)).click();
+	   			Thread.sleep(2000);
+	   			driver.findElement(By.id("move-to-pr-btn")).click();
+	   			Thread.sleep(2000);
+	   		
+			    } else {
+			    	driver.findElement(By.id("edit-item-"+i)).click();
+				Random random = new Random();
+					List<WebElement> batchno = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+						int batchsize = random.nextInt(batchno.size());
+							WebElement batchtype = batchno.get(batchsize);
+								batchtype.click();
+								Thread.sleep(2000);
+									String batchnum = batchtype.getAttribute("id");
+										WebElement issuedqty = driver.findElement(By.id("issue-qty"));
+											issuedqty.clear();
+												issuedqty.sendKeys(result);
+												Thread.sleep(2000);
+													driver.findElement(By.id("reset-btn")).click();
+													Thread.sleep(2000);
+						driver.findElement(By.id("edit-item-"+i)).click();
+						List<WebElement> batchno1 = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+						int batchsize1 = random.nextInt(batchno1.size());
+						WebElement batchtype1 = batchno1.get(batchsize1);
+						batchtype1.click();
+						Thread.sleep(2000);
+						String batchnum1 = batchtype1.getAttribute("id");
+						WebElement issuedqty1 = driver.findElement(By.id("issue-qty"));
+						issuedqty1.clear();
+						issuedqty1.sendKeys(result);
+						Thread.sleep(2000);
+						driver.findElement(By.id("add-item-btn")).click();	Thread.sleep(2000);
+						driver.findElement(By.id("select-item-"+i)).click();
+			   			Thread.sleep(2000);
+					  driver.findElement(By.id("issue-btn")).click();		Thread.sleep(2000);															
+			    }
+	
+		}
+
+	}
+	public  static void singlecustomerisuuance (WebDriver driver) throws InterruptedException {
+		for (int i=1; i<=3;i++){
+			WebElement indentnumber3 = driver.findElement(By.id("indent-number"));
+			Actions a3=new Actions(driver);
+			indentnumber3.click();
+			a3.keyDown(Keys.ENTER).click().perform();
+			Thread.sleep(3000);
+		
+			driver.findElement(By.id("customer-id")).click();
+			Random random = new Random();
+			List<WebElement> customertype = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+			int customer = random.nextInt(customertype.size());
+			WebElement randomElement1 = customertype.get(customer);
+			String indenttypeid1 = randomElement1.getAttribute("id");
+			randomElement1.click();
+			Thread.sleep(3000);
+			
+			WebElement contactperson=driver.findElement(By.id("customer-contact-person"));
+			contactperson.click();
+			contactperson.sendKeys("vahinvenkat");
+			Thread.sleep(3000);
+			
+			driver.findElement(By.id("customer-payment-type")).click();
+			List<WebElement> paymentmode = driver.findElements(By.xpath("//*[@id='customer-payment-type-panel']//mat-option"));
+			int payment = random.nextInt(paymentmode.size());
+			WebElement paymenttypemode = paymentmode.get(payment);
+			paymenttypemode.click();
+			String paymenttype = paymenttypemode.getAttribute("id");
+			Thread.sleep(3000);
+			
+			driver.findElement(By.id("customer-payment-day-type")).click();
+			List<WebElement> paymentdays = driver.findElements(By.xpath("//*[@id='customer-payment-day-type-panel']//mat-option"));
+			int paymentday = random.nextInt(paymentdays.size());
+			WebElement paymenttype1 = paymentdays.get(paymentday);
+			paymenttype1.click();
+			String paymenttype2 = paymenttype1.getAttribute("id");
+			Thread.sleep(3000);
+			WebElement indentnumber2 = driver.findElement(By.id("indent-number"));
+			Actions a2=new Actions(driver);
+			indentnumber2.click();
+			a2.keyDown(Keys.ENTER).click().perform();
+			Thread.sleep(2000);
+			
+			WebElement avaliblestockid = driver.findElement(By.id("item-stock-"+i));
+			String avaliableqty=avaliblestockid.getAttribute("value");
+			System.out.println(avaliableqty);
+	        Thread.sleep(2000);
+	        
+			WebElement Allocatedid = driver.findElement(By.id("item-allocated-qty-pr-"+i));
+			String Allocatedqty=Allocatedid.getAttribute("value");
+			System.out.println(Allocatedqty);
+			Thread.sleep(2000);
+			
+			WebElement ReqApprovedid = driver.findElement(By.id("item-req-approved-qty-"+i));
+			String ReqApprovedqty=ReqApprovedid.getAttribute("value");
+			System.out.println(ReqApprovedqty);
+			Thread.sleep(2000);
+			
+			WebElement ReqPendingid	 = driver.findElement(By.id("item-req-pending-qty-"+i));
+			String ReqPendingqty=ReqPendingid.getAttribute("value");
+			System.out.println(ReqPendingqty);
+			Thread.sleep(2000);
+       
+			double num1 =  Double.parseDouble(Allocatedqty);
+			double num2 =  Double.parseDouble(ReqApprovedqty);
+			double difference = num2 - num1; 
+			String result = String.valueOf(difference/2);
+			System.out.println(result);
+			
+			if (avaliableqty.equals("0")) {
+				 WebElement issueqty = driver.findElement(By.id("item-issue-qty-"+i));
+				 issueqty.clear();
+	   			issueqty.sendKeys(result);
+	   			Thread.sleep(2000);
+	   				driver.findElement(By.id("select-item-"+i)).click();
+	   			Thread.sleep(2000);
+	   			driver.findElement(By.id("move-to-pr-btn")).click();
+	   			Thread.sleep(2000);
+	   		
+			    } else {
+			    	driver.findElement(By.id("edit-item-"+i)).click();
+				
+					List<WebElement> batchno = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+						int batchsize = random.nextInt(batchno.size());
+							WebElement batchtype = batchno.get(batchsize);
+								batchtype.click();
+								Thread.sleep(2000);
+									String batchnum = batchtype.getAttribute("id");
+										WebElement issuedqty = driver.findElement(By.id("issue-qty"));
+											issuedqty.clear();
+												issuedqty.sendKeys(result);
+												Thread.sleep(2000);
+													driver.findElement(By.id("reset-btn")).click();
+													Thread.sleep(2000);
+						driver.findElement(By.id("edit-item-"+i)).click();
+						List<WebElement> batchno1 = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+						int batchsize1 = random.nextInt(batchno1.size());
+						WebElement batchtype1 = batchno1.get(batchsize1);
+						batchtype1.click();
+						Thread.sleep(2000);
+						String batchnum1 = batchtype1.getAttribute("id");
+						WebElement issuedqty1 = driver.findElement(By.id("issue-qty"));
+						issuedqty1.clear();
+						issuedqty1.sendKeys(result);
+						Thread.sleep(2000);
+						driver.findElement(By.id("add-item-btn")).click();	Thread.sleep(2000);
+						driver.findElement(By.id("select-item-"+i)).click();
+			   			Thread.sleep(2000);
+					  driver.findElement(By.id("issue-btn")).click();		Thread.sleep(2000);	
+
+		}
+		
+
+	}
+
+	}
+public  static void mutiplecustomerisuuance (WebDriver driver) throws InterruptedException {
+		
+		WebElement indentnumber3 = driver.findElement(By.id("indent-number"));
+		Actions a3=new Actions(driver);
+		indentnumber3.click();
+		a3.keyDown(Keys.ENTER).click().perform();
+		Thread.sleep(3000);
+	
+		driver.findElement(By.id("customer-id")).click();
+		Random random = new Random();
+		List<WebElement> customertype = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+		int customer = random.nextInt(customertype.size());
+		WebElement randomElement1 = customertype.get(customer);
+		String indenttypeid1 = randomElement1.getAttribute("id");
+		randomElement1.click();
+		Thread.sleep(3000);
+		
+		WebElement contactperson=driver.findElement(By.id("customer-contact-person"));
+		contactperson.click();
+		contactperson.sendKeys("vahinvenkat");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.id("customer-payment-type")).click();
+		List<WebElement> paymentmode = driver.findElements(By.xpath("//*[@id='customer-payment-type-panel']//mat-option"));
+		int payment = random.nextInt(paymentmode.size());
+		WebElement paymenttypemode = paymentmode.get(payment);
+		paymenttypemode.click();
+		String paymenttype = paymenttypemode.getAttribute("id");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.id("customer-payment-day-type")).click();
+		List<WebElement> paymentdays = driver.findElements(By.xpath("//*[@id='customer-payment-day-type-panel']//mat-option"));
+		int paymentday = random.nextInt(paymentdays.size());
+		WebElement paymenttype1 = paymentdays.get(paymentday);
+		paymenttype1.click();
+		String paymenttype2 = paymenttype1.getAttribute("id");
+		Thread.sleep(3000);
+		WebElement indentnumber2 = driver.findElement(By.id("indent-number"));
+		Actions a2=new Actions(driver);
+		indentnumber2.click();
+		a2.keyDown(Keys.ENTER).click().perform();
+		Thread.sleep(2000);
+		
+		for (int i=1; i<=3;i++){
+		WebElement avaliblestockid = driver.findElement(By.id("item-stock-"+i));
+		String avaliableqty=avaliblestockid.getAttribute("value");
+		System.out.println(avaliableqty);
+        Thread.sleep(2000);
+        
+		WebElement Allocatedid = driver.findElement(By.id("item-allocated-qty-pr-"+i));
+		String Allocatedqty=Allocatedid.getAttribute("value");
+		System.out.println(Allocatedqty);
+		Thread.sleep(2000);
+		
+		WebElement ReqApprovedid = driver.findElement(By.id("item-req-approved-qty-"+i));
+		String ReqApprovedqty=ReqApprovedid.getAttribute("value");
+		System.out.println(ReqApprovedqty);
+		Thread.sleep(2000);
+		
+		WebElement ReqPendingid	 = driver.findElement(By.id("item-req-pending-qty-"+i));
+		String ReqPendingqty=ReqPendingid.getAttribute("value");
+		System.out.println(ReqPendingqty);
+		Thread.sleep(2000);
+   
+		double num1 =  Double.parseDouble(Allocatedqty);
+		double num2 =  Double.parseDouble(ReqApprovedqty);
+		double difference = num2 - num1; 
+		String result = String.valueOf(difference-0.1);
+		System.out.println(result);
+		Thread.sleep(2000);
+		
+		if (avaliableqty.equals("0")) {
+			 WebElement issueqty = driver.findElement(By.id("item-issue-qty-"+i));
+			 issueqty.clear();
+  			issueqty.sendKeys(result);
+  			Thread.sleep(2000);
+  			  				    }	 else {
+  			  			    	driver.findElement(By.id("edit-item-"+i)).click();
+  			  				
+  								List<WebElement> batchno = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+  									int batchsize = random.nextInt(batchno.size());
+  										WebElement batchtype = batchno.get(batchsize);
+  											batchtype.click();
+  											Thread.sleep(2000);
+  												String batchnum = batchtype.getAttribute("id");
+  													WebElement issuedqty = driver.findElement(By.id("issue-qty"));
+  														issuedqty.clear();
+  															issuedqty.sendKeys(result);
+  															Thread.sleep(2000);
+  																driver.findElement(By.id("reset-btn")).click();
+  																Thread.sleep(2000);
+  									driver.findElement(By.id("edit-item-"+i)).click();
+  									List<WebElement> batchno1 = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+  									int batchsize1 = random.nextInt(batchno1.size());
+  									WebElement batchtype1 = batchno1.get(batchsize1);
+  									batchtype1.click();
+  									Thread.sleep(2000);
+  									String batchnum1 = batchtype1.getAttribute("id");
+  									WebElement issuedqty1 = driver.findElement(By.id("issue-qty"));
+  									issuedqty1.clear();
+  									issuedqty1.sendKeys(result);
+  									Thread.sleep(2000);	
+				}
+}
+		for (int j=1; j<=3;j++){
+			WebElement avaliblestockid1 = driver.findElement(By.id("item-stock-"+j));
+			String avaliableqty1=avaliblestockid1.getAttribute("value");
+			System.out.println(avaliableqty1);
+	        Thread.sleep(2000);
+			if (avaliableqty1.equals("0")) {
+				driver.findElement(By.id("select-item-"+j)).click();
+	   			Thread.sleep(2000);
+	   			driver.findElement(By.id("move-to-pr-btn")).click();
+	   			Thread.sleep(2000);
+	  			  				    }	 
+	 		}  			    	
+		
+}
+public  static void mutipleitemisuuance (WebDriver driver) throws InterruptedException {
+	
+	WebElement indentnumber3 = driver.findElement(By.id("indent-number"));
+	Actions a3=new Actions(driver);
+	indentnumber3.click();
+	a3.keyDown(Keys.ENTER).click().perform();
+	Thread.sleep(3000);
+
+	driver.findElement(By.id("customer-id")).click();
+	Random random = new Random();
+	List<WebElement> customertype = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+	int customer = random.nextInt(customertype.size());
+	WebElement randomElement1 = customertype.get(customer);
+	String indenttypeid1 = randomElement1.getAttribute("id");
+	randomElement1.click();
+	Thread.sleep(3000);
+	
+	WebElement contactperson=driver.findElement(By.id("customer-contact-person"));
+	contactperson.click();
+	contactperson.sendKeys("vahinvenkat");
+	Thread.sleep(3000);
+	
+	driver.findElement(By.id("customer-payment-type")).click();
+	List<WebElement> paymentmode = driver.findElements(By.xpath("//*[@id='customer-payment-type-panel']//mat-option"));
+	int payment = random.nextInt(paymentmode.size());
+	WebElement paymenttypemode = paymentmode.get(payment);
+	paymenttypemode.click();
+	String paymenttype = paymenttypemode.getAttribute("id");
+	Thread.sleep(3000);
+	
+	driver.findElement(By.id("customer-payment-day-type")).click();
+	List<WebElement> paymentdays = driver.findElements(By.xpath("//*[@id='customer-payment-day-type-panel']//mat-option"));
+	int paymentday = random.nextInt(paymentdays.size());
+	WebElement paymenttype1 = paymentdays.get(paymentday);
+	paymenttype1.click();
+	String paymenttype2 = paymenttype1.getAttribute("id");
+	Thread.sleep(3000);
+	WebElement indentnumber2 = driver.findElement(By.id("indent-number"));
+	Actions a2=new Actions(driver);
+	indentnumber2.click();
+	a2.keyDown(Keys.ENTER).click().perform();
+	Thread.sleep(2000);
+	
+	for (int i=1; i<=3;i++){
+	WebElement avaliblestockid = driver.findElement(By.id("item-stock-"+i));
+	String avaliableqty=avaliblestockid.getAttribute("value");
+	System.out.println(avaliableqty);
+    Thread.sleep(2000);
+    
+	WebElement Allocatedid = driver.findElement(By.id("item-allocated-qty-pr-"+i));
+	String Allocatedqty=Allocatedid.getAttribute("value");
+	System.out.println(Allocatedqty);
+	Thread.sleep(2000);
+	
+	WebElement ReqApprovedid = driver.findElement(By.id("item-req-approved-qty-"+i));
+	String ReqApprovedqty=ReqApprovedid.getAttribute("value");
+	System.out.println(ReqApprovedqty);
+	Thread.sleep(2000);
+	
+	WebElement ReqPendingid	 = driver.findElement(By.id("item-req-pending-qty-"+i));
+	String ReqPendingqty=ReqPendingid.getAttribute("value");
+	System.out.println(ReqPendingqty);
+	Thread.sleep(2000);
+
+	double num1 =  Double.parseDouble(Allocatedqty);
+	double num2 =  Double.parseDouble(ReqApprovedqty);
+	double difference = num2 - num1; 
+	String result = String.valueOf(difference-0.1);
+	System.out.println(result);
+	Thread.sleep(2000);
+	
+	if (avaliableqty.equals("0")) {
+		 WebElement issueqty = driver.findElement(By.id("item-issue-qty-"+i));
+		 issueqty.clear();
+			issueqty.sendKeys(result);
+			Thread.sleep(2000);
+			  				    }	 else {
+			  			    	driver.findElement(By.id("edit-item-"+i)).click();
+			  				
+								List<WebElement> batchno = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+									int batchsize = random.nextInt(batchno.size());
+										WebElement batchtype = batchno.get(batchsize);
+											batchtype.click();
+											Thread.sleep(2000);
+												String batchnum = batchtype.getAttribute("id");
+													WebElement issuedqty = driver.findElement(By.id("issue-qty"));
+														issuedqty.clear();
+															issuedqty.sendKeys(result);
+															Thread.sleep(2000);
+																driver.findElement(By.id("reset-btn")).click();
+																Thread.sleep(2000);
+									driver.findElement(By.id("edit-item-"+i)).click();
+									List<WebElement> batchno1 = driver.findElements(By.xpath("//*[@id='customer-id-panel']//mat-option"));
+									int batchsize1 = random.nextInt(batchno1.size());
+									WebElement batchtype1 = batchno1.get(batchsize1);
+									batchtype1.click();
+									Thread.sleep(2000);
+									String batchnum1 = batchtype1.getAttribute("id");
+									WebElement issuedqty1 = driver.findElement(By.id("issue-qty"));
+									issuedqty1.clear();
+									issuedqty1.sendKeys(result);
+									Thread.sleep(2000);	
+			}
+}
+	for (int j=1; j<=3;j++){
+		WebElement avaliblestockid1 = driver.findElement(By.id("item-stock-"+j));
+		String avaliableqty1=avaliblestockid1.getAttribute("value");
+		System.out.println(avaliableqty1);
+        Thread.sleep(2000);
+		if (avaliableqty1.equals("0")) {
+			driver.findElement(By.id("select-item-"+j)).click();
+   			Thread.sleep(2000);
+   			driver.findElement(By.id("move-to-pr-btn")).click();
+   			Thread.sleep(2000);
+  			  				    }	 
+ 		}  			    	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+	
+		
+
+	
