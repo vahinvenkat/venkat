@@ -1,0 +1,63 @@
+package automation;
+
+import java.util.List;
+
+import java.util.Random;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import testng.NewTest;
+public class vivobio {
+
+
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "D:\\Softwares\\selenium\\chrome-113\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize(); // maximize the window
+		
+		driver.get("https://vivobiouat.virinchihospitals.com/#/login");
+		Thread.sleep(3000);
+
+		WebElement loginusr = driver.findElement(By.id("mat-input-0"));
+		loginusr.sendKeys("4032");
+		Thread.sleep(3000);
+		
+		WebElement loginpasswd = driver.findElement(By.id("password"));
+		loginpasswd.sendKeys("test123");
+		Thread.sleep(3000);
+		driver.findElement(By.id("login")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("purchase")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("indent")).click();
+		Thread.sleep(3000);
+		IndentCheck ic = new IndentCheck(); 
+		ic.indentChecking(driver);
+		driver.findElement(By.id("reset-btn")).click();
+		ic.indentChecking(driver);
+		driver.findElement(By.id("submit-btn")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("pr-number-date-1")).click();
+		Thread.sleep(3000);
+		ic.updateChecking(driver);
+		Thread.sleep(3000);
+		driver.findElement(By.id("submit-btn")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("pr-number-date-1")).click();
+		Thread.sleep(3000);
+		ic.updateChecking(driver);
+		Thread.sleep(3000);
+		driver.findElement(By.id("send-for-approve-btn")).click();
+		Thread.sleep(3000);
+		ic.approvalqty(driver);
+		Thread.sleep(3000);
+		
+		//	driver.close();
+
+
+
+	}
+
+}
