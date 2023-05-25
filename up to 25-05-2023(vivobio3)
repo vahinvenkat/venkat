@@ -1,0 +1,237 @@
+package automation;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.Random;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Pur_order {
+	public static void PR_Details(WebDriver driver) throws InterruptedException{
+		
+		Thread.sleep(2000); 
+		driver.findElement(By.id("supplier-id")).click();                                                                           //click on select supplier
+		
+		List<WebElement> SSup = driver.findElements(By.xpath("//*[@id='supplier-id-panel']//mat-option"));                          //select random supplier
+		Random ran = new Random();
+		int inde_x = ran.nextInt(SSup.size());
+		WebElement ranEle = SSup.get(inde_x);
+		String Eid = ranEle.getAttribute("id");
+		ranEle.click();
+		
+		driver.findElement(By.id("po-date")).click();                                                                                //click on purchase order date
+		Thread.sleep(2000); 
+		driver.findElement(By.xpath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[6]/td[4]/button/div[1]")).click();   //select date
+		Thread.sleep(2000); 
+		driver.findElement(By.id("payment-term-id")).click();                                                                        //click on payment terms
+		Thread.sleep(2000); 
+		List<WebElement> PayTerm = driver.findElements(By.xpath("//*[@id='payment-term-id-panel']//mat-option"));                    //select random payment term
+		Random rand = new Random();
+		int index = rand.nextInt(PayTerm.size());
+		WebElement ranElem = PayTerm.get(index);
+		String id = ranElem.getAttribute("id");
+		ranElem.click();
+
+		driver.findElement(By.id("delivery-term-id")).click();                                                                      //click on delivery terms
+
+		List<WebElement> DeliveryTerms = driver.findElements(By.xpath("//*[@id='delivery-term-id-panel']//mat-option"));
+		Random rand1 = new Random();
+		int index1 = rand1.nextInt(DeliveryTerms.size());
+		WebElement ranElem1 = DeliveryTerms.get(index1); 
+		String id1 = ranElem1.getAttribute("id"); 
+		ranElem1.click();
+
+		driver.findElement(By.id("validity-term-id")).click();                                                                     //click on Select validity term
+
+
+		List<WebElement> valiTerm = driver.findElements(By.xpath("//*[@id='validity-term-id-panel']//mat-option"));                //select random validity term
+		Random rand2 = new Random();
+		int index2 = rand2.nextInt(valiTerm.size());
+		WebElement ranElem2 = valiTerm.get(index2);
+		String id2 = ranElem2.getAttribute("id"); 
+		ranElem2.click();
+
+
+		driver.findElement(By.id("quotation-number")).click();                                                                    //click on quotation-number
+
+		WebElement QUONUM=driver.findElement(By.id("quotation-number"));QUONUM.sendKeys("12345");                                 //enter Quotation Number
+
+		driver.findElement(By.id("quotation-date")).click();                                                                      //click on Quotation number date
+
+		driver.findElement(By.xpath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[6]/td[4]/button/div[1]")).click();  //select Date
+
+		/*driver.findElement(By.id("upload-files")).click();                                                                      //click on upload files
+
+		driver.findElement(By.id("file-upload")).sendKeys("C:\\Users\\venkatarakesh.t\\Pictures\\download (1).jpg");              //upload image
+		driver.findElement(By.id("//*[@id='container']/div[2]/button/span[1]")).click();                                          //save 
+		driver.findElement(By.id("upload-files")).click();                                                                        //click on upload files
+		driver.findElement(By.xpath("//*[@id='container']/div[1]/div/div[1]/img[2]")).click();                                    //delete file
+		driver.findElement(By.id("upload-files")).click();                                                                        //click on upload files
+		driver.findElement(By.id("file-upload")).sendKeys("C:\\Users\\venkatarakesh.t\\Pictures\\download (1).jpg");              //upload image
+		driver.findElement(By.id("//*[@id='container']/div[2]/button/span[1]")).click();                                          //save 
+
+		driver.findElement(By.id("upload-files")).click();                                                                        //click on upload files
+		driver.findElement(By.id("file-upload")).sendKeys("C:\\Users\\venkatarakesh.t\\Pictures\\Screenshot 2023-05-22 151559.png");        //upload 
+		driver.findElement(By.id("//*[@id='container']/div[2]/button/span[1]")).click();                                          //save 
+		driver.findElement(By.id("upload-files")).click();                                                                        //click on upload files
+		driver.findElement(By.id("file-upload")).sendKeys("C:\\Users\\venkatarakesh.t\\Downloads\\TxnCodesList (3).pdf");         //upload 
+		driver.findElement(By.id("//*[@id='container']/div[2]/button/span[1]")).click();                                          //save 
+
+		 */
+		  
+		
+		
+		for(int i=1;i<=2;i++){
+		
+				WebElement ITUom=driver.findElement(By.id("item-uom-"+i));                                                                //get text of issue UOM
+				String SUOM= ITUom.getText();
+				System.out.println(SUOM);
+
+				driver.findElement(By.id("item-supplier-uom-"+i)).click();                                                                //click on supplier UOM
+				Thread.sleep(2000);
+				List<WebElement> SupUOM = driver.findElements(By.xpath("//*[@id='item-supplier-uom-"+i+"-panel']//mat-option"));             //select random Supplier UOM
+				Random rand4 = new Random();
+				int index4 = rand4.nextInt(SupUOM.size());
+				WebElement ranElem4 = SupUOM.get(index4);
+				ranElem4.click();
+				String id4 = ranElem4.getText();
+				System.out.println(id4);                                                                                                 //print selected UOM
+
+
+				if(id4.equals(SUOM))
+				{
+					System.out.println("Both UOM Are Equal");
+				}
+				else
+				{
+
+					WebElement QtyU=driver.findElement(By.id("item-qty-"+i));
+					String IUOM=QtyU.getAttribute("value");
+					System.out.println(IUOM);
+
+					WebElement Sqty=driver.findElement(By.id("qty-per-unit-"+i));
+					Sqty.click();
+					Sqty.clear();Sqty.sendKeys(IUOM);
+                }
+				
+				WebElement Cost=driver.findElement(By.id("cost-per-bag-"+i));Cost.click();Cost.sendKeys("100");                                                    //enter cost
+				Thread.sleep(2000);
+				driver.findElement(By.id("item-discount-percentage-"+i)).click();                                                                     //click on discount
+				Thread.sleep(1000);
+				WebElement discount=driver.findElement(By.id("item-discount-percentage-"+i));discount.sendKeys("2");                                  //enter discount
+				Thread.sleep(2000);
+				driver.findElement(By.id("item-igst-"+i)).click();                                                                                    //GST
+				Thread.sleep(1000);
+				WebElement GST=driver.findElement(By.id("item-igst-"+i));Thread.sleep(2000);                                                          //ENTER GST
+				GST.sendKeys("1"); 
+				driver.findElement(By.id("item-description-"+i)).click();                                                                             //click on discription
+				Thread.sleep(2000); 
+				WebElement DisCrip=driver.findElement(By.id("item-description-"+i));DisCrip.sendKeys("Discription");                                  //Enter discription
+		        }       
+		        driver.findElement(By.id("extra-charges-btn")).click();                                                                              //click on Extra Charges
+				Thread.sleep(2000); 
+				WebElement Extra=driver.findElement(By.id("extra-charge-description-1"));Extra.click();                                                                          
+				Extra.sendKeys("Transport");                                                                                                         //Enter Extra Charge Discription
+				Thread.sleep(2000); 
+				WebElement ExAmT=driver.findElement(By.id("extra-charge-amount-1"));ExAmT.click();                                                   //Enter Extra Amount               
+				ExAmT.sendKeys("10"); 
+				Thread.sleep(2000); 
+				driver.findElement(By.id("extra-charges-btn")).click();                                                                              //click on Extra Charges
+				Thread.sleep(2000); 
+				driver.findElement(By.id("extra-charge-delete-2")).click();                                         								//Delete Select Extra Charges
+				Thread.sleep(2000); 
+				driver.switchTo().alert().dismiss();                                                                                                 //selct cancel in popup
+				Thread.sleep(2000); 
+				driver.findElement(By.id("extra-charge-delete-2")).click();                                                                          //Delete Select Extra Charges
+				Thread.sleep(2000); 
+				driver.switchTo().alert().accept();                                                                                                 //click on ok button
+				Thread.sleep(2000); 
+				WebElement SpI=driver.findElement(By.id("special-instructions-ip"));SpI.click();                                                    //Click on Instruction And Enter
+				SpI.sendKeys("Special Instructions");
+				Thread.sleep(2000); 
+				driver.findElement(By.id("special-instructions-btn")).click();                                                                     //Click On Add
+				Thread.sleep(2000); 
+				driver.findElement(By.id("edit-special-instruction-4")).click();                                                                   //click on edit
+				Thread.sleep(2000); 
+				SpI.click();SpI.clear();SpI.sendKeys("Special Instructions For Purchase Order");                                                   //Clear And Re-enter
+				Thread.sleep(2000); 
+				driver.findElement(By.id("special-instructions-btn")).click();                                                                     //Click On Add
+				Thread.sleep(2000); 
+				driver.findElement(By.id("delete-special-instruction-4")).click();                                                                 //Delete Added Instruction
+				Thread.sleep(2000); 
+				driver.switchTo().alert().dismiss();                                                                                              //selct cancel in popup
+				Thread.sleep(2000); 
+				driver.findElement(By.id("delete-special-instruction-4")).click();                                                                //Delete Added Instruction
+				Thread.sleep(2000); 
+				driver.switchTo().alert().accept();                                                                                               //click on ok button
+				Thread.sleep(2000); 
+				SpI.click();SpI.clear();SpI.sendKeys("Special Instructions For Purchase Order");                                                  //Clear And Re-enter
+				Thread.sleep(2000); 
+				driver.findElement(By.id("special-instructions-btn")).click();                                                                    //Click On Add
+		}
+			
+	
+
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver","C:\\WebDrivers\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+
+		driver.manage().window().maximize();                                                 
+		driver.get("https://vivobiouat.virinchihospitals.com/vivobiouat/#/login");                                                    //url
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));                                                            //Time Duration 
+
+		WebElement loginid = driver.findElement(By.id("mat-input-0"));loginid.sendKeys("4032");                                       //username
+		Thread.sleep(1000);
+
+		WebElement Password =driver.findElement(By.id("password"));Password.sendKeys("test123");                                      //password
+		Thread.sleep(1000);	
+
+		driver.findElement(By.id("password-hide")).click();                                                                           //eye
+		Thread.sleep(1000);                                                                      
+		driver.findElement(By.id("password-hide")).click();                                                                           //eye
+		Thread.sleep(1000);                                                                                                      
+        driver.findElement(By.id("login")).click();                                                                                   //login Button
+		Thread.sleep(2000); 
+        driver.findElement(By.id("purchase")).click();                                                                                //click on purchase module                                                                  //PURCHASE Module
+		Thread.sleep(5000);      
+		driver.findElement(By.id("purchaseOrderImg")).click();                                                                      //click on purchase order
+		Thread.sleep(5000);
+		driver.findElement(By.id("pr-master-id")).click();                                                                          //click on select PR
+		Thread.sleep(5000);
+		driver.findElement(By.id("pr-option-12")).click();                                                                          //select first PR number
+		PR_Details(driver);                                                                                                         //Call Method           
+		Thread.sleep(2000);
+		driver.findElement(By.id("clear-form")).click();                                                                            //Click on Clear
+		Thread.sleep(3000);
+		driver.findElement(By.id("pr-master-id")).click();                                                                          //click on select PR
+		Thread.sleep(3000);
+		driver.findElement(By.id("pr-option-12")).click();                                                                          //select first PR number
+		PR_Details(driver);                                                                                                         //Call Method 
+        driver.findElement(By.id("save-btn")).click();                                                                              //Click On Save(submit)
+      	Thread.sleep(2000);
+      	driver.findElement(By.id("po-number-date1")).click();                                                                       //Select New Record In Hamburgar
+      	Thread.sleep(2000);
+     	driver.findElement(By.id("save-btn")).click();                                                                              //Click On Save(UPDATE)
+		Thread.sleep(2000);
+		driver.findElement(By.id("po-number-date1")).click();                                                                       //Select New Record In Hamburgar
+      	Thread.sleep(2000);
+     	driver.findElement(By.id("approve-btn")).click();                                                                           //Click on Approve 
+     	Thread.sleep(2000); 
+     	driver.findElement(By.id("po-number-date1")).click();                                                                       //Select New Record In Hamburgar
+      	Thread.sleep(2000);
+      	driver.findElement(By.id("generate-purchase-order-btn")).click();                                                           //click on Generate purchase order
+      	driver.findElement(By.cssSelector("cr-button.cancel-button")).click();
+      	
+     	
+
+
+
+
+	}
+
+}
