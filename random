@@ -1,0 +1,3006 @@
+
+
+
+// Import required packages
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+// Set up the ChromeDriver
+System.setProperty("webdriver.chrome.driver", "path/to/chromedriver.exe");
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+
+// Navigate to the page with the calendar
+driver.get("http://example.com");
+
+// Find the input field for the date and click on it
+WebElement dateField = driver.findElement(By.id("date-input-field"));
+dateField.click();
+
+// Get the current date and format it as required by the calendar
+LocalDate currentDate = LocalDate.now();
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+String formattedDate = currentDate.format(formatter);
+
+// Find all the available dates in the calendar
+List<WebElement> allDates = driver.findElements(By.xpath("//table[@class='calendar-table']//td"));
+
+// Loop through the dates and click on the one that matches the current date
+for (WebElement date : allDates) {
+    if (date.getText().equals(formattedDate)) {
+        date.click();
+        break;
+    }
+}
+
+// Wait for the date to be selected
+WebDriverWait wait = new WebDriverWait(driver, 10);
+wait.until(ExpectedConditions.attributeToBe(dateField, "value", formattedDate));
+
+// Close the browser
+driver.quit();
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.Random;
+
+public class RandomTextGenerator {
+
+    public static void main(String[] args) {
+        // set the path of ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // create an instance of ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // navigate to the website where the text field is located
+        driver.get("https://www.example.com");
+
+        // find the text field element by its ID
+        WebElement textField = driver.findElement(By.id("text-field"));
+
+        // generate a random string of length 10
+        String randomText = generateRandomString(10);
+
+        // enter the random text into the text field
+        textField.sendKeys(randomText);
+
+        // close the browser window
+        driver.quit();
+    }
+
+    public static String generateRandomString(int length) {
+        // create a string of all possible characters
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        // create a random object
+        Random rand = new Random();
+
+        // create a StringBuilder object to hold the random string
+        StringBuilder sb = new StringBuilder();
+
+        // generate a random string of the specified length
+        for (int i = 0; i < length; i++) {
+            // get a random index in the characters string
+            int index = rand.nextInt(characters.length());
+
+            // add the character at the random index to the StringBuilder
+            sb.append(characters.charAt(index));
+        }
+
+        // return the random string
+        return sb.toString();
+    }
+}
+// Launch the web application and navigate to the page
+WebDriver driver = new ChromeDriver();
+driver.get("https://example.com/records");
+
+// Find the latest record and click on it
+List<WebElement> records = driver.findElements(By.cssSelector(".record"));
+WebElement latestRecord = records.get(records.size() - 1);
+latestRecord.click();
+
+// Find the color ID element and update it
+WebElement colorIdElement = driver.findElement(By.id("colorId"));
+colorIdElement.clear();
+colorIdElement.sendKeys("newColorId");
+
+// Save the changes
+WebElement saveButton = driver.findElement(By.id("saveButton"));
+saveButton.click();
+
+
+
+
+import java.util.Random;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class RandomPhoneNumber {
+    public static void main(String[] args) {
+        // Set up ChromeDriver
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        
+        // Navigate to webpage
+        driver.get("https://example.com");
+
+        // Generate random phone number
+        Random random = new Random();
+        String phoneNumber = "555" + String.format("%07d", random.nextInt(10000000));
+        
+        // Find and input phone number into text field
+        WebElement phoneField = driver.findElement(By.id("phone"));
+        phoneField.sendKeys(phoneNumber);
+        
+        // Close browser
+        driver.quit();
+    }
+}
+
+import java.util.Random;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class RandomEmailSender {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://example.com");
+
+        WebElement emailField = driver.findElement(By.id("email"));
+        String randomEmail = generateRandomEmail();
+        emailField.sendKeys(randomEmail);
+
+        driver.quit();
+    }
+
+    private static String generateRandomEmail() {
+        String email = "test";
+        Random random = new Random();
+        int suffix = random.nextInt(1000);
+        email += suffix;
+        email += "@example.com";
+        return email;
+    }
+}
+public class RandomNumberGenerator {
+    public static void main(String[] args) {
+        // Set the path of the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Initialize the WebDriver instance
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage where the text field is located
+        driver.get("http://www.example.com");
+
+        // Locate the text field by its ID (replace "textfield_id" with the actual ID of the text field)
+        WebElement textField = driver.findElement(By.id("textfield_id"));
+
+        // Generate a random number below 25
+        Random rand = new Random();
+        int randomNum = rand.nextInt(25);
+
+        // Enter the random number into the text field
+        textField.sendKeys(Integer.toString(randomNum));
+
+        // Close the browser
+        driver.quit();
+    }
+}
+import java.util.List;
+import java.util.Random;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class RandomElement {
+
+  public static void main(String[] args) {
+  
+    // Set up WebDriver
+    System.setProperty("webdriver.chrome.driver", "path/to/chromedriver.exe");
+    WebDriver driver = new ChromeDriver();
+    
+    // Navigate to web page with list of elements
+    driver.get("https://example.com/list-of-elements");
+    
+    // Get list of elements by XPath
+    List<WebElement> elements = driver.findElements(By.xpath("//ul[@class='element-list']/li"));
+    
+    // Generate random number within range of list size
+    Random rand = new Random();
+    int index = rand.nextInt(elements.size());
+    
+    // Click on random element and perform action based on its ID
+    WebElement randomElement = elements.get(index);
+    String id = randomElement.getAttribute("id");
+    randomElement.click();
+    
+    if (id.equals("element1")) {
+      // Do something for element1
+    } else if (id.equals("element2")) {
+      // Do something for element2
+    } else {
+      // Do something for other elements
+    }
+    
+    // Close the browser
+    driver.quit();
+  }
+}
+import random
+import time
+from selenium import webdriver
+
+# Launch the browser and navigate to the OTP page
+driver = webdriver.Chrome()
+driver.get('https://example.com/otp')
+
+# Generate a random six-digit OTP
+otp = random.randint(100000, 999999)
+
+# Input the OTP into the form and submit it
+otp_input = driver.find_element_by_name('otp')
+otp_input.send_keys(otp)
+submit_button = driver.find_element_by_xpath('//button[text()="Submit"]')
+submit_button.click()
+
+# Wait for the confirmation page to load and print the confirmation message
+time.sleep(2) # Wait for 2 seconds to let the page load
+confirmation_message = driver.find_element_by_css_selector('.confirmation-message').text
+print('Confirmation message:', confirmation_message)
+
+# Close the browser window
+driver.quit()
+D:\Softwares\eclipse workspace\testing\testng.xml
+
+
+
+
+sume "driver" is a WebDriver instance that has already navigated to the page with the "success" pop-up.
+
+// Wait for the pop-up to appear (assuming it appears after a successful update).
+WebDriverWait wait = new WebDriverWait(driver, 10);
+WebElement successPopup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("success-popup")));
+
+// Assert that the pop-up contains the expected message.
+String expectedMessage = "Updated successfully!";
+String actualMessage = successPopup.getText();
+Assert.assertEquals(actualMessage, expectedMessage);
+
+// Close the pop-up by clicking the "OK" button.
+successPopup.findElement(By.cssSelector("button")).click();
+
+
+
+java
+Copy code
+
+
+
+
+// Assume the following HTML structure for the radio buttons:
+// <input type="radio" name="radioGroup" value="option1" id="option1">
+// <input type="radio" name="radioGroup" value="option2" id="option2">
+// <input type="radio" name="radioGroup" value="option3" id="option3">
+
+// Find all radio buttons
+List<WebElement> radioButtons = driver.findElements(By.name("radioGroup"));
+
+// Find the radio button that is selected
+WebElement selectedButton = null;
+for (WebElement radioButton : radioButtons) {
+    if (radioButton.isSelected()) {
+        selectedButton = radioButton;
+        break;
+    }
+}
+
+// If a radio button is selected, enable and display the remaining ones
+if (selectedButton != null) {
+    for (WebElement radioButton : radioButtons) {
+        if (!radioButton.equals(selectedButton)) {
+            radioButton.click(); // This line enables the radio button
+            radioButton.displayed(); // This line displays the radio button
+        }
+    }
+}
+
+
+WebDriver driver = new ChromeDriver();
+driver.get("http://example.com");
+
+WebElement inputField = driver.findElement(By.id("username"));
+String text = inputField.getAttribute("value");
+
+System.out.println(text);
+
+driver.quit();
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.List;
+import java.util.Random;
+
+public class RandomNameSelection {
+    public static void main(String[] args) {
+        List<String> names = List.of("John", "Alice", "Bob", "Emma", "David");
+
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://example.com");
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(names.size());
+        String randomName = names.get(randomIndex);
+
+        WebElement nameField = driver.findElement(By.id("name-input"));
+        nameField.sendKeys(randomName);
+
+        // Perform other actions or validations with the selected name
+
+        driver.quit();
+    }
+}
+
+  List<String> firstName = List.of("VAHIN", "RAKESH","KAMLESH" ,"SRIKANTH", "RAGHU", "ANIL", "VAMSI","SAMBA");
+  Random random = new Random();
+  int randomname = random.nextInt(firstName.size());
+  String Firstname = firstName.get(randomIndex);
+     WebElement nameField = driver.findElement(By.id("txtFirstName"));
+        nameField.sendKeys(Firstname);
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class QuantityChecker {
+    public static void main(String[] args) {
+        // Set up the WebDriver
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage
+        driver.get("https://example.com");
+
+        // Locate and retrieve field values
+        WebElement requiredQtyField = driver.findElement(By.id("requiredQty"));
+        WebElement stockField = driver.findElement(By.id("stock"));
+        WebElement issuedQtyField = driver.findElement(By.id("issuedQty"));
+
+        // Get the field values
+        int requiredQty = Integer.parseInt(requiredQtyField.getText());
+        int stockQty = Integer.parseInt(stockField.getText());
+        int issuedQty = Integer.parseInt(issuedQtyField.getText());
+
+        // Perform quantity checks
+        if (requiredQty > stockQty) {
+            System.out.println("Insufficient stock!");
+        } else if (requiredQty > issuedQty) {
+            int pendingQty = requiredQty - issuedQty;
+            System.out.println("Pending quantity: " + pendingQty);
+        } else {
+            System.out.println("All quantities fulfilled!");
+        }
+
+        // Close the WebDriver
+        driver.quit();
+    }
+}
+
+
+
+
+HOW TO GET RANDOM SELECTION OF LIST 
+
+
+   List<WebElement> objectname1 = driver.findElements(By.xpath("here we have to take the list of list of items in panel with //tagname"));
+		Random random = new Random();
+		int objectname2 = random.nextInt(objectname1.size());
+		WebElement objectname3 = objectname1.get(objectname2);
+		String objectname4 = objectname3.getAttribute("id");
+		objectname3.click();
+		
+		
+		List<WebElement> companytype = driver.findElements(By.xpath("here we have to take the list of list of items in panel with //tagname"));
+		int listtems = companytype.size();
+		Random random = new Random();
+		int randomProduct = random.nextInt(listtems);
+		companytype.get(randomProduct).click();
+		
+		
+IN LIST WE WANT TO GET FIRST ITEM BY MOUSE OPERATIONS
+
+
+List<WebElement> companytype = driver.findElements(By.id("mat-select-value-5"));
+		Actions a=new Actions(driver);
+		a.keyDown(Keys.ENTER).click(companytype.get(0)).click().perform();
+		
+		
+		
+		HOW TO GET RANDOM NUMBER IN INT AND DOUBLE  AND IN TEXT FEILD WE WANT TO GENERATE THAT NUMBER 
+		
+		package basics;
+     import java.util.Random;
+      public class java1 {
+	public static void main(String[] args) {
+		for (int i=0;i<10;i++){
+		Random random =new Random ();
+		int vahin= random.nextInt(1000);
+		System.out.println("number=" +vahin);
+		}
+	}
+}
+
+
+how to select random generator number in text field  
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.Random;
+
+public class RandomTextGenerator {
+
+    public static void main(String[] args) {
+        // set the path of ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // create an instance of ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // navigate to the website where the text field is located
+        driver.get("https://www.example.com");
+
+        // find the text field element by its ID
+        WebElement textField = driver.findElement(By.id("text-field"));
+
+        // generate a random string of length 10
+        String randomText = generateRandomString(10);
+
+        // enter the random text into the text field
+        textField.sendKeys(randomText);
+
+        // close the browser window
+        driver.quit();
+
+import java.util.Random;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class RandomNumberGenerator {
+  public static void main(String[] args) {
+    // Set the path to the chromedriver executable
+    System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+    // Create a new instance of the Chrome driver
+    WebDriver driver = new ChromeDriver();
+
+    // Navigate to the website
+    driver.get("https://example.com");
+
+    // Generate a random number with two decimal places
+    double randomNumber = new Random().nextDouble() * 100.0;
+
+    // Find the text field element by its ID
+    WebElement textField = driver.findElement(By.id("textfield"));
+
+    // Enter the random number into the text field
+    textField.sendKeys(String.format("%.2f", randomNumber));
+
+    // Close the browser
+    driver.quit();
+  }
+}
+
+
+how to write a program to generate a random num in first element in text field and second element generation num should be lseethan thefirst generated num in selenium web driver java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.Random;
+
+public class RandomNumberGenerator {
+    public static void main(String[] args) {
+        // Set up the webdriver and navigate to the website
+        WebDriver driver = new ChromeDriver();
+        driver.navigate().to("https://example.com");
+
+        // Generate a random number
+        Random random = new Random();
+        int randomNumber1 = random.nextInt(100);
+        int randomNumber2 = random.nextInt(randomNumber1);
+
+        // Input the first random number into the text field
+        WebElement textField1 = driver.findElement(By.id("text-field-1"));
+        textField1.sendKeys(Integer.toString(randomNumber1));
+
+        // Input the second random number into the text field
+        WebElement textField2 = driver.findElement(By.id("text-field-2"));
+        textField2.sendKeys(Integer.toString(randomNumber2));
+
+        // Close the webdriver
+        driver.quit();
+    }
+}
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.Random;
+
+public class RandomNumberTest {
+    public static void main(String[] args) {
+        // Set the path to the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage
+        driver.get("https://example.com");
+
+        // Generate the first random number
+        int firstNum = new Random().nextInt(1000) + 1;
+
+        // Find the first text field and set the first random number as its value
+        WebElement firstTextField = driver.findElement(By.id("firstTextField"));
+        firstTextField.sendKeys(String.valueOf(firstNum));
+
+        // Generate the second random number
+        int secondNum = new Random().nextInt(firstNum);
+
+        // Find the second text field and set the second random number as its value
+        WebElement secondTextField = driver.findElement(By.id("secondTextField"));
+        secondTextField.sendKeys(String.valueOf(secondNum));
+
+        // Close the browser
+        driver.quit();
+    }
+}
+HOW TO WRITE A PROGRAM ELEMENT IS VISIBLE OR ENABLED 
+
+
+	import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ElementVisibility {
+    public static void main(String[] args) {
+        // Set the path for the ChromeDriver
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Create a new instance of the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage
+        driver.get("https://www.example.com");
+
+        // Find the element
+        WebElement element = driver.findElement(By.id("element-id"));
+
+        // Check if the element is visible
+        boolean isVisible = element.isDisplayed();
+
+        // Check if the element is enabled
+        boolean isEnabled = element.isEnabled();
+
+        // Check if the element is selected
+        boolean isSelected = element.isSelected();
+
+        // Print the results
+        System.out.println("Is element visible? " + isVisible);
+        System.out.println("Is element enabled? " + isEnabled);
+        System.out.println("Is element selected? " + isSelected);
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+how to select latest record in 	selenium	
+		List<WebElement> dynamicList = driver.findElements(By.xpath("here we have to take the list of list of items in panel with //tagname"));
+		int dynamicListSize = dynamicList.size();
+	    WebElement latestOption = dynamicList.get(dynamicListSize - 1);
+		latestOption.click();
+		
+		ry{
+   //statements that may cause an exception
+}catch(Exception e){
+  //statements that will execute when exception occurs
+}  
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueProcessor {
+    private WebDriver driver;
+    
+    public ValueProcessor() {
+        // Set the path to the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        
+        // Initialize the WebDriver
+        driver = new ChromeDriver();
+    }
+    
+    public void processValue(Object value) {
+        if (value instanceof Integer) {
+            processInteger((Integer) value);
+        } else if (value instanceof Double) {
+            processDouble((Double) value);
+        } else {
+            System.out.println("Unsupported value type");
+        }
+    }
+    
+    private void processInteger(Integer value) {
+        // Perform actions specific to integers
+        // For example:
+        System.out.println("Processing integer value: " + value);
+        // Your code here
+    }
+    
+    private void processDouble(Double value) {
+        // Perform actions specific to doubles
+        // For example:
+        System.out.println("Processing double value: " + value);
+        // Your code here
+    }
+    
+    public void close() {
+        // Close the WebDriver
+        driver.quit();
+    }
+    
+    public static void main(String[] args) {
+        ValueProcessor processor = new ValueProcessor();
+        
+        // Example usage
+        int intValue = 10;
+        double doubleValue = 3.14;
+        
+        processor.processValue(intValue);
+        processor.processValue(doubleValue);
+        
+        processor.close();
+    }
+}
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.text.DecimalFormat;
+
+public class ValueProcessingExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        double numericValue;
+        try {
+            numericValue = Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            System.out.println("The value is not a numeric value.");
+            driver.quit();
+            return;
+        }
+
+        if (numericValue % 1 == 0) {
+            // Value is an integer
+            int intValue = (int) numericValue;
+            double dividedValue = (double) intValue / 4;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            String formattedValue = decimalFormat.format(dividedValue);
+            System.out.println("The value is an integer: " + intValue);
+            System.out.println("The divided value: " + formattedValue);
+        } else {
+            // Value is a double
+            double dividedValue = numericValue / 4;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            String formattedValue = decimalFormat.format(dividedValue);
+            System.out.println("The value is a double: " + numericValue);
+            System.out.println("The divided value: " + formattedValue);
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDivisionExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+            int dividedValue = intValue / 4;
+            System.out.println("The value divided into 4 parts: " + dividedValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+                double dividedValue = doubleValue / 4;
+                System.out.println("The value divided into 4 parts: " + dividedValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+double num1 =  Double.parseDouble(Allocatedqty);
+			double num2 =  Double.parseDouble(ReqApprovedqty);
+			double difference = num2 - num1; 
+			String result = String.valueOf(difference/2);
+			System.out.println(result);
+
+
+DecimalFormat decimalFormat = new DecimalFormat("#.###");
+            double dividedValue = intValue ;
+            
+           	String formattedValue = decimalFormat.format(dividedValue/4);
+            System.out.println("The value  of dividedValue is : " + dividedValue);
+
+
+double dividedValue = intValue ;
+String result = String.valueOf(dividedValue/2);
+			System.out.println(result);
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDataTypeExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        
+        driver.get("https://example.com"); // Replace with the URL of your web page
+        
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+        
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+        
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+        
+        driver.quit();
+    }
+}
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDivisionExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+            int dividedValue = intValue / 4;
+            System.out.println("The value divided into 4 parts: " + dividedValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+                double dividedValue = doubleValue / 4;
+                System.out.println("The value divided into 4 parts: " + dividedValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueAdditionExample {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage
+        driver.get("https://example.com");
+
+        // Find the WebElement that contains the value you want to retrieve
+        WebElement valueElement = driver.findElement(By.id("valueElementId"));
+
+        // Get the value as a String
+        String valueString = valueElement.getText();
+
+        // Perform the necessary operations based on the data type
+        if (valueString.contains(".")) {
+            // Value is a double
+            double value = Double.parseDouble(valueString);
+            double doubleValueToAdd = 1.5; // Example double value to add
+            double result = value + doubleValueToAdd;
+            System.out.println("Result (double): " + result);
+        } else {
+            // Value is an integer
+            int value = Integer.parseInt(valueString);
+            int intValueToAdd = 5; // Example int value to add
+            int result = value + intValueToAdd;
+            System.out.println("Result (int): " + result);
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueProcessor {
+    private WebDriver driver;
+    
+    public ValueProcessor() {
+        // Set the path to the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        
+        // Initialize the WebDriver
+        driver = new ChromeDriver();
+    }
+    
+    public void processValue(Object value) {
+        if (value instanceof Integer) {
+            processInteger((Integer) value);
+        } else if (value instanceof Double) {
+            processDouble((Double) value);
+        } else {
+            System.out.println("Unsupported value type");
+        }
+    }
+    
+    private void processInteger(Integer value) {
+        // Perform actions specific to integers
+        // For example:
+        System.out.println("Processing integer value: " + value);
+        // Your code here
+    }
+    
+    private void processDouble(Double value) {
+        // Perform actions specific to doubles
+        // For example:
+        System.out.println("Processing double value: " + value);
+        // Your code here
+    }
+    
+    public void close() {
+        // Close the WebDriver
+        driver.quit();
+    }
+    
+    public static void main(String[] args) {
+        ValueProcessor processor = new ValueProcessor();
+        
+        // Example usage
+        int intValue = 10;
+        double doubleValue = 3.14;
+        
+        processor.processValue(intValue);
+        processor.processValue(doubleValue);
+        
+        processor.close();
+    }
+}
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.text.DecimalFormat;
+
+public class ValueProcessingExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        double numericValue;
+        try {
+            numericValue = Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            System.out.println("The value is not a numeric value.");
+            driver.quit();
+            return;
+        }
+
+        if (numericValue % 1 == 0) {
+            // Value is an integer
+            int intValue = (int) numericValue;
+            double dividedValue = (double) intValue / 4;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            String formattedValue = decimalFormat.format(dividedValue);
+            System.out.println("The value is an integer: " + intValue);
+            System.out.println("The divided value: " + formattedValue);
+        } else {
+            // Value is a double
+            double dividedValue = numericValue / 4;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            String formattedValue = decimalFormat.format(dividedValue);
+            System.out.println("The value is a double: " + numericValue);
+            System.out.println("The divided value: " + formattedValue);
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDivisionExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+            int dividedValue = intValue / 4;
+            System.out.println("The value divided into 4 parts: " + dividedValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+                double dividedValue = doubleValue / 4;
+                System.out.println("The value divided into 4 parts: " + dividedValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+double num1 =  Double.parseDouble(Allocatedqty);
+			double num2 =  Double.parseDouble(ReqApprovedqty);
+			double difference = num2 - num1; 
+			String result = String.valueOf(difference/2);
+			System.out.println(result);
+
+
+DecimalFormat decimalFormat = new DecimalFormat("#.###");
+            double dividedValue = intValue ;
+            
+           	String formattedValue = decimalFormat.format(dividedValue/4);
+            System.out.println("The value  of dividedValue is : " + dividedValue);
+
+
+double dividedValue = intValue ;
+String result = String.valueOf(dividedValue/2);
+			System.out.println(result);
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDataTypeExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        
+        driver.get("https://example.com"); // Replace with the URL of your web page
+        
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+        
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+        
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+        
+        driver.quit();
+    }
+}
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDivisionExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+            int dividedValue = intValue / 4;
+            System.out.println("The value divided into 4 parts: " + dividedValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+                double dividedValue = doubleValue / 4;
+                System.out.println("The value divided into 4 parts: " + dividedValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueAdditionExample {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage
+        driver.get("https://example.com");
+
+        // Find the WebElement that contains the value you want to retrieve
+        WebElement valueElement = driver.findElement(By.id("valueElementId"));
+
+        // Get the value as a String
+        String valueString = valueElement.getText();
+
+        // Perform the necessary operations based on the data type
+        if (valueString.contains(".")) {
+            // Value is a double
+            double value = Double.parseDouble(valueString);
+            double doubleValueToAdd = 1.5; // Example double value to add
+            double result = value + doubleValueToAdd;
+            System.out.println("Result (double): " + result);
+        } else {
+            // Value is an integer
+            int value = Integer.parseInt(valueString);
+            int intValueToAdd = 5; // Example int value to add
+            int result = value + intValueToAdd;
+            System.out.println("Result (int): " + result);
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class DateTimeExample {
+    public static void main(String[] args) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        System.out.println("Current Date: " + currentDate);
+        System.out.println("Current Time: " + currentTime);
+    }
+}
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DatePickerExample {
+    public static void main(String[] args) {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://example.com"); // Replace with your target web page URL
+
+        // Locate the date picker element
+        WebElement datePicker = driver.findElement(By.id("datepicker"));
+
+        // Get the current system date
+        LocalDate currentDate = LocalDate.now();
+
+        // Format the date as per the date picker's expected format
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+        // Enter the formatted date into the date picker
+        datePicker.sendKeys(formattedDate);
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+
+if (value.matches("\\d+")) {
+    // Value is an integer, perform the appropriate method
+    int intValue = Integer.parseInt(value);
+    int result = performIntegerMethod(intValue); // Replace with your own logic for integer processing
+    resultElement.sendKeys(String.valueOf(result));
+} else if (value.matches("\\d+\\.\\d+")) {
+    // Value is a double, perform the appropriate method
+    double doubleValue = Double.parseDouble(value);
+    double result = performDoubleMethod(doubleValue); // Replace with your own logic for double processing
+    resultElement.sendKeys(String.valueOf(result));
+} else {
+    // Value is neither an integer nor a double
+    System.out.println("Invalid value!");
+}
+
+
+
+
+
+
+
+
+if (itemcostvalue.contains(".")) {
+		    // Value is a double, perform the appropriate method
+		    double doubleValue = Double.parseDouble(itemcostvalue);
+		    double result = performDoubleMethod(doubleValue);; // Replace with your own logic for double processing
+		    WebElement mrpcost= driver.findElement(By.id("item-mrp-per-uom-1"));
+		    mrpcost.click();
+		    mrpcost.sendKeys(String.valueOf(result));
+		} else  {
+	
+			 // Value is an integer, perform the appropriate method
+		    int intValue = Integer.parseInt(itemcostvalue);
+		    int result = performIntegerMethod(intValue); // Replace with your own logic for integer processing
+		    WebElement mrpcost= driver.findElement(By.id("item-mrp-per-uom-1"));
+		    mrpcost.click();
+		    mrpcost.sendKeys(String.valueOf(result));
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		  if (itemcostvalue.contains(".")) {
+	            // Value is a double
+	            double value = Double.parseDouble(itemcostvalue);
+	            double doubleValueToAdd = 10.5; // Example double value to add
+           double result = value + doubleValueToAdd;
+	            System.out.println("Result (double): " + result);
+	            
+        } else {
+	            // Value is an integer
+            int value = Integer.parseInt(itemcostvalue);
+            int intValueToAdd = 5; // Example int value to add
+            int result = value + intValueToAdd;
+	            System.out.println("Result (int): " + result);
+	         }
+import java.util.HashSet;
+import java.util.Set;
+
+public class Example {
+    // Static variable to store the values
+    private static Set<String> uniqueValues = new HashSet<>();
+
+    public static void main(String[] args) {
+        storeValues("Value 1");
+        storeValues("Value 2");
+        storeValues("Value 1"); // This value will be ignored because it's a duplicate
+        useValues();
+    }
+
+    public static void storeValues(String value) {
+        uniqueValues.add(value);
+    }
+
+    public static void useValues() {
+        for (String value : uniqueValues) {
+            System.out.println(value);
+        }
+    }
+}
+
+
+
+
+
+		Set<String> s = new HashSet<String>();
+		for (int i = 0; i < 4; i++) {
+			// driver.findElement(By.id("item-name")).click();
+			WebElement inputField = driver.findElement(By.id("item-name"));
+			inputField.sendKeys("a");
+			Thread.sleep(4000);
+			List<WebElement> itemname = driver.findElements(By.xpath(" 	//*[@id='mat-autocomplete-0']//mat-option"));
+			int indexitem = random.nextInt(itemname.size());
+			System.out.println(indexitem);
+			WebElement randomElementitem = itemname.get(indexitem);
+			String itemnames = randomElementitem.getText();
+			System.out.println(itemnames);
+			randomElementitem.click();
+			if (s.add(itemnames) == false) {
+				System.out.println("duplicate value :" + indexitem);
+				driver.findElement(By.id("reset-item-btn")).click();
+				i--;
+				continue;
+			}
+			s.add(itemnames);
+			double randomNumber = new Random().nextDouble() * 25.0;
+			WebElement itemqty = driver.findElement(By.id("item-request-quantity"));
+			itemqty.sendKeys(String.format("%.2f", randomNumber));
+			Thread.sleep(2000);
+			driver.findElement(By.id("save-item-btn")).click();
+			Thread.sleep(2000);
+		}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class DataStorage {
+    private Set<String> storedValues;
+
+    public DataStorage() {
+        storedValues = new HashSet<>();
+    }
+
+    public void storeValue(String value) {
+        storedValues.add(value);
+    }
+
+    public void processValues() {
+        // Perform some operation on the stored values
+        for (String value : storedValues) {
+            // Do something with each value
+            System.out.println(value);
+        }
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        DataStorage storage = new DataStorage();
+        storage.storeValue("Value 1");
+        storage.storeValue("Value 2");
+        storage.storeValue("Value 1"); // Adding a duplicate value
+
+        storage.processValues();
+    }
+}
+
+
+
+
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class DateTimeExample {
+    public static void main(String[] args) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        System.out.println("Current Date: " + currentDate);
+        System.out.println("Current Time: " + currentTime);
+    }
+}
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DatePickerExample {
+    public static void main(String[] args) {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://example.com"); // Replace with your target web page URL
+
+        // Locate the date picker element
+        WebElement datePicker = driver.findElement(By.id("datepicker"));
+
+        // Get the current system date
+        LocalDate currentDate = LocalDate.now();
+
+        // Format the date as per the date picker's expected format
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+        // Enter the formatted date into the date picker
+        datePicker.sendKeys(formattedDate);
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+
+if (value.matches("\\d+")) {
+    // Value is an integer, perform the appropriate method
+    int intValue = Integer.parseInt(value);
+    int result = performIntegerMethod(intValue); // Replace with your own logic for integer processing
+    resultElement.sendKeys(String.valueOf(result));
+} else if (value.matches("\\d+\\.\\d+")) {
+    // Value is a double, perform the appropriate method
+    double doubleValue = Double.parseDouble(value);
+    double result = performDoubleMethod(doubleValue); // Replace with your own logic for double processing
+    resultElement.sendKeys(String.valueOf(result));
+} else {
+    // Value is neither an integer nor a double
+    System.out.println("Invalid value!");
+}
+
+
+
+
+
+
+
+
+if (itemcostvalue.contains(".")) {
+		    // Value is a double, perform the appropriate method
+		    double doubleValue = Double.parseDouble(itemcostvalue);
+		    double result = performDoubleMethod(doubleValue);; // Replace with your own logic for double processing
+		    WebElement mrpcost= driver.findElement(By.id("item-mrp-per-uom-1"));
+		    mrpcost.click();
+		    mrpcost.sendKeys(String.valueOf(result));
+		} else  {
+	
+			 // Value is an integer, perform the appropriate method
+		    int intValue = Integer.parseInt(itemcostvalue);
+		    int result = performIntegerMethod(intValue); // Replace with your own logic for integer processing
+		    WebElement mrpcost= driver.findElement(By.id("item-mrp-per-uom-1"));
+		    mrpcost.click();
+		    mrpcost.sendKeys(String.valueOf(result));
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		  if (itemcostvalue.contains(".")) {
+	            // Value is a double
+	            double value = Double.parseDouble(itemcostvalue);
+	            double doubleValueToAdd = 10.5; // Example double value to add
+           double result = value + doubleValueToAdd;
+	            System.out.println("Result (double): " + result);
+	            
+        } else {
+	            // Value is an integer
+            int value = Integer.parseInt(itemcostvalue);
+            int intValueToAdd = 5; // Example int value to add
+            int result = value + intValueToAdd;
+	            System.out.println("Result (int): " + result);
+	         }
+import java.util.HashSet;
+import java.util.Set;
+
+public class Example {
+    // Static variable to store the values
+    private static Set<String> uniqueValues = new HashSet<>();
+
+    public static void main(String[] args) {
+        storeValues("Value 1");
+        storeValues("Value 2");
+        storeValues("Value 1"); // This value will be ignored because it's a duplicate
+        useValues();
+    }
+
+    public static void storeValues(String value) {
+        uniqueValues.add(value);
+    }
+
+    public static void useValues() {
+        for (String value : uniqueValues) {
+            System.out.println(value);
+        }
+    }
+}
+
+
+
+
+
+		Set<String> s = new HashSet<String>();
+		for (int i = 0; i < 4; i++) {
+			// driver.findElement(By.id("item-name")).click();
+			WebElement inputField = driver.findElement(By.id("item-name"));
+			inputField.sendKeys("a");
+			Thread.sleep(4000);
+			List<WebElement> itemname = driver.findElements(By.xpath(" 	//*[@id='mat-autocomplete-0']//mat-option"));
+			int indexitem = random.nextInt(itemname.size());
+			System.out.println(indexitem);
+			WebElement randomElementitem = itemname.get(indexitem);
+			String itemnames = randomElementitem.getText();
+			System.out.println(itemnames);
+			randomElementitem.click();
+			if (s.add(itemnames) == false) {
+				System.out.println("duplicate value :" + indexitem);
+				driver.findElement(By.id("reset-item-btn")).click();
+				i--;
+				continue;
+			}
+			s.add(itemnames);
+			double randomNumber = new Random().nextDouble() * 25.0;
+			WebElement itemqty = driver.findElement(By.id("item-request-quantity"));
+			itemqty.sendKeys(String.format("%.2f", randomNumber));
+			Thread.sleep(2000);
+			driver.findElement(By.id("save-item-btn")).click();
+			Thread.sleep(2000);
+		}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class DataStorage {
+    private Set<String> storedValues;
+
+    public DataStorage() {
+        storedValues = new HashSet<>();
+    }
+
+    public void storeValue(String value) {
+        storedValues.add(value);
+    }
+
+    public void processValues() {
+        // Perform some operation on the stored values
+        for (String value : storedValues) {
+            // Do something with each value
+            System.out.println(value);
+        }
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        DataStorage storage = new DataStorage();
+        storage.storeValue("Value 1");
+        storage.storeValue("Value 2");
+        storage.storeValue("Value 1"); // Adding a duplicate value
+
+        storage.processValues();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueProcessor {
+    private WebDriver driver;
+    
+    public ValueProcessor() {
+        // Set the path to the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        
+        // Initialize the WebDriver
+        driver = new ChromeDriver();
+    }
+    
+    public void processValue(Object value) {
+        if (value instanceof Integer) {
+            processInteger((Integer) value);
+        } else if (value instanceof Double) {
+            processDouble((Double) value);
+        } else {
+            System.out.println("Unsupported value type");
+        }
+    }
+    
+    private void processInteger(Integer value) {
+        // Perform actions specific to integers
+        // For example:
+        System.out.println("Processing integer value: " + value);
+        // Your code here
+    }
+    
+    private void processDouble(Double value) {
+        // Perform actions specific to doubles
+        // For example:
+        System.out.println("Processing double value: " + value);
+        // Your code here
+    }
+    
+    public void close() {
+        // Close the WebDriver
+        driver.quit();
+    }
+    
+    public static void main(String[] args) {
+        ValueProcessor processor = new ValueProcessor();
+        
+        // Example usage
+        int intValue = 10;
+        double doubleValue = 3.14;
+        
+        processor.processValue(intValue);
+        processor.processValue(doubleValue);
+        
+        processor.close();
+    }
+}
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.text.DecimalFormat;
+
+public class ValueProcessingExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        double numericValue;
+        try {
+            numericValue = Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            System.out.println("The value is not a numeric value.");
+            driver.quit();
+            return;
+        }
+
+        if (numericValue % 1 == 0) {
+            // Value is an integer
+            int intValue = (int) numericValue;
+            double dividedValue = (double) intValue / 4;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            String formattedValue = decimalFormat.format(dividedValue);
+            System.out.println("The value is an integer: " + intValue);
+            System.out.println("The divided value: " + formattedValue);
+        } else {
+            // Value is a double
+            double dividedValue = numericValue / 4;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            String formattedValue = decimalFormat.format(dividedValue);
+            System.out.println("The value is a double: " + numericValue);
+            System.out.println("The divided value: " + formattedValue);
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDivisionExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+            int dividedValue = intValue / 4;
+            System.out.println("The value divided into 4 parts: " + dividedValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+                double dividedValue = doubleValue / 4;
+                System.out.println("The value divided into 4 parts: " + dividedValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+double num1 =  Double.parseDouble(Allocatedqty);
+			double num2 =  Double.parseDouble(ReqApprovedqty);
+			double difference = num2 - num1; 
+			String result = String.valueOf(difference/2);
+			System.out.println(result);
+
+
+DecimalFormat decimalFormat = new DecimalFormat("#.###");
+            double dividedValue = intValue ;
+            
+           	String formattedValue = decimalFormat.format(dividedValue/4);
+            System.out.println("The value  of dividedValue is : " + dividedValue);
+
+
+double dividedValue = intValue ;
+String result = String.valueOf(dividedValue/2);
+			System.out.println(result);
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDataTypeExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        
+        driver.get("https://example.com"); // Replace with the URL of your web page
+        
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+        
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+        
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+        
+        driver.quit();
+    }
+}
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueDivisionExample {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://example.com"); // Replace with the URL of your web page
+
+        WebElement valueElement = driver.findElement(By.id("elementId")); // Replace with the ID or locator of your element
+
+        String value = valueElement.getText(); // or valueElement.getAttribute("value");
+
+        try {
+            int intValue = Integer.parseInt(value);
+            System.out.println("The value is an integer: " + intValue);
+            int dividedValue = intValue / 4;
+            System.out.println("The value divided into 4 parts: " + dividedValue);
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(value);
+                System.out.println("The value is a double: " + doubleValue);
+                double dividedValue = doubleValue / 4;
+                System.out.println("The value divided into 4 parts: " + dividedValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+
+        driver.quit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ValueAdditionExample {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage
+        driver.get("https://example.com");
+
+        // Find the WebElement that contains the value you want to retrieve
+        WebElement valueElement = driver.findElement(By.id("valueElementId"));
+
+        // Get the value as a String
+        String valueString = valueElement.getText();
+
+        // Perform the necessary operations based on the data type
+        if (valueString.contains(".")) {
+            // Value is a double
+            double value = Double.parseDouble(valueString);
+            double doubleValueToAdd = 1.5; // Example double value to add
+            double result = value + doubleValueToAdd;
+            System.out.println("Result (double): " + result);
+        } else {
+            // Value is an integer
+            int value = Integer.parseInt(valueString);
+            int intValueToAdd = 5; // Example int value to add
+            int result = value + intValueToAdd;
+            System.out.println("Result (int): " + result);
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+	driver.findElement(By.id("pr-number-date-1")).click();
+		Thread.sleep(2000);
+		for (int i=1;i<=3;i++){
+			WebElement reqqty = driver.findElement(By.id("item-req-qty-"+i));
+			double reqqtyvalue = Double.valueOf(reqqty.getAttribute("value"));
+			System.out.println("number=" +reqqtyvalue);
+			WebElement appqty = driver.findElement(By.id("item-approved-qty-"+i));
+			appqty.clear();
+			double approvedqty = new Random().nextDouble() * reqqtyvalue;
+			appqty.sendKeys(String.format("%.2f",approvedqty));
+			Thread.sleep(5000);	
+		}
+		for (int i=1;i<=3;i++){
+			driver.findElement(By.id("select-item-"+i)).click();	
+			Thread.sleep(2000);
+		}
+		WebElement indentid1= driver.findElement(By.id("indentPurposeId"));
+		String enteredText1 = indentid1.getText();		System.out.println("number=" +enteredText1);
+		driver.findElement(By.id("approve-btn")).click();	
+		Thread.sleep(2000);
+		driver.findElement(By.id("stores")).click();
+		Thread.sleep(2000);
+		if (enteredText1.equals("In-house Usage")) {
+			driver.findElement(By.id("itemIssuance")).click();	
+			Thread.sleep(2000);
+			WebElement indentnumber = driver.findElement(By.id("indent-number"));
+			Actions a=new Actions(driver);
+			indentnumber.click();
+			a.keyDown(Keys.ENTER).click().perform();
+			Thread.sleep(2000);
+			driver.findElement(By.id("reset-btn")).click();
+			Thread.sleep(2000);
+			singleitemisuuance(driver);	Thread.sleep(2000);
+			WebElement checkingindnum = driver.findElement(By.id("indent-number"));
+			Actions a2=new Actions(driver);checkingindnum.click();
+			a2.keyDown(Keys.ENTER).click().perform();Thread.sleep(2000);
+			String indtnum=checkingindnum.getText();
+			System.out.println(indtnum);
+			Thread.sleep(2000);
+			for (int i=1;i<=3;i++){
+				driver.findElement(By.id("purchase")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.id("purchaseRequisitionImg")).click();
+				Thread.sleep(2000);
+				WebElement indentnumid= driver.findElement(By.id("item-indent-number-1"));
+				String indentnumberid = indentnumid.getAttribute("value");
+				System.out.println("number=" +indentnumberid); Thread.sleep(2000);
+				WebElement indenttypeid1= driver.findElement(By.id("item-indent-purpose-1"));
+				String indent = indenttypeid1.getText();
+				System.out.println("number=" +indent); 
+				Thread.sleep(2000);
+				if(enteredText1.equals(indent) && indtnum.equals(indentnumberid)) {				
+					singleprandpo(driver,i);
+				}
+			}
+//			driver.findElement(By.id("stores")).click();
+//			Thread.sleep(2000);
+//			driver.findElement(By.id("itemIssuance")).click();	
+//			Thread.sleep(2000);
+//			mutipleitemisuuance(driver);
+//			Thread.sleep(2000);
+			
+			
+			driver.findElement(By.id("purchase")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.id("purchaseRequisitionImg")).click();
+			Thread.sleep(2000);
+			mutipleprandpo(driver);
+			
+				}else if (enteredText1.equals("External Sales")) {
+			Thread.sleep(2000);
+			driver.findElement(By.id("customerIssuanceImg")).click();
+			Thread.sleep(2000);
+			WebElement indentnumber1 = driver.findElement(By.id("indent-number"));
+			Actions a1=new Actions(driver);
+			indentnumber1.click();
+			a1.keyDown(Keys.ENTER).click().perform();
+			Thread.sleep(2000);
+			driver.findElement(By.id("reset-btn")).click();
+			Thread.sleep(2000);
+			singlecustomerisuuance(driver);	Thread.sleep(2000);
+			WebElement checkingindnum = driver.findElement(By.id("indent-number"));
+			Actions a2=new Actions(driver);checkingindnum.click();
+			a2.keyDown(Keys.ENTER).click().perform();Thread.sleep(2000);
+			String indtnum=checkingindnum.getText();
+			System.out.println(indtnum);
+			Thread.sleep(2000);
+			for (int i=1;i<=3;i++){
+				driver.findElement(By.id("purchase")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.id("purchaseRequisitionImg")).click();
+				Thread.sleep(2000);
+				WebElement indentnumid= driver.findElement(By.id("item-indent-number-1"));
+				String indentnumberid = indentnumid.getAttribute("value");
+				System.out.println("number=" +indentnumberid); Thread.sleep(2000);
+				WebElement indenttypeid1= driver.findElement(By.id("item-indent-purpose-1"));
+				String indent = indenttypeid1.getText();
+				System.out.println("number=" +indent); 
+				Thread.sleep(2000);
+				if(enteredText1.equals(indent) && indtnum.equals(indentnumberid)) {				
+					singleprandpo(driver,i);
+				}
+			}
+				}
+//			driver.findElement(By.id("stores")).click();
+//			Thread.sleep(2000);
+//			driver.findElement(By.id("customerIssuanceImg")).click();
+//			Thread.sleep(2000);
+//			mutiplecustomerisuuance(driver);
+//			Thread.sleep(2000);
+			
+			driver.findElement(By.id("purchase")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.id("purchaseRequisitionImg")).click();
+			Thread.sleep(2000);
+			mutipleprandpo(driver);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	import java.util.Random;
+
+public class RandomNumberGenerator {
+    public static void main(String[] args) {
+        Random random = new Random();
+        
+        for (int i = 1; i <= 3; i++) {
+            if (i == 1) {
+                int randomNumber = random.nextInt();
+                System.out.println("Integer: " + randomNumber);
+            } else if (i == 2) {
+                double randomNumber = random.nextDouble();
+                System.out.println("Double: " + randomNumber);
+            } else if (i == 3) {
+                float randomNumber = random.nextFloat();
+                System.out.println("Float: " + randomNumber);
+            }
+        }
+    }
+}
+
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.Random;
+System.setProperty("webdriver.chrome.driver", "path_to_chromedriver");
+WebDriver driver = new ChromeDriver();
+driver.get("your_application_url");
+String[] items = {"item1", "item2", "item3", "item4", "item5"};
+Random random = new Random();
+
+for (String item : items) {
+    int dataType = random.nextInt(5);  // Generate a random number between 0 and 4
+
+    switch (dataType) {
+        case 0:  // String
+            String stringValue = "RandomString" + random.nextInt(100);
+            // Enter the string value into the field associated with the item
+            driver.findElement(By.id(item)).sendKeys(stringValue);
+            break;
+            
+        case 1:  // Integer
+            int intValue = random.nextInt(100);
+            // Convert the integer value to string and enter it into the field
+            driver.findElement(By.id(item)).sendKeys(String.valueOf(intValue));
+            break;
+            
+        case 2:  // Double
+            double doubleValue = random.nextDouble() * 100;
+            // Convert the double value to string and enter it into the field
+            driver.findElement(By.id(item)).sendKeys(String.valueOf(doubleValue));
+            break;
+            
+        case 3:  // Boolean
+            boolean booleanValue = random.nextBoolean();
+            // Convert the boolean value to string and enter it into the field
+            driver.findElement(By.id(item)).sendKeys(String.valueOf(booleanValue));
+            break;
+            
+        case 4:  // Date
+            // Generate a random date value using your preferred method or library
+            // Enter the date value into the field associated with the item
+            driver.findElement(By.id(item)).sendKeys("2023-06-07");
+            break;
+    }
+}
+driver.quit();
+//	@Test(priority = 1)
+//	void creatinguser(){
+//		 HashMap data = new HashMap();
+//		 
+//		 data.put("name", "vahin");
+//		 data.put("job", "se");
+//		 
+//		 given()
+//		 .contentType("application/json")
+//		 .body(data)
+//		 .when ()
+//		.post("https://reqres.in/api/users2")
+//		.then()
+//		.statusCode(201)
+//		.log().all();
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+
+Response response = given()
+                        .when()
+                        .get("https://api.example.com/endpoint");
+String fieldValue = response.jsonPath().getString("fieldName");
+// Example method that uses the extracted field value
+anotherMethod(fieldValue);
+
+
+
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+
+public class ApiAutomationExample {
+
+    public static void main(String[] args) {
+        // Send a request to the API and retrieve the response
+        Response response = given()
+                .when()
+                .get("https://api.example.com/endpoint");
+
+        // Extract the field value from the response body
+        String fieldValue = response.jsonPath().getString("fieldName");
+
+        // Pass the extracted field value to another method
+        anotherMethod(fieldValue);
+    }
+
+    private static void anotherMethod(String fieldValue) {
+        // Do something with the field value
+        System.out.println("Field value: " + fieldValue);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class ApiAutomation {
+
+    public static void main(String[] args) {
+        // Step 1: Set up dependencies
+
+        // Step 2: Make the first API request
+        Response firstResponse = RestAssured.get("https://api.example.com/first");
+
+        // Extract data from the first API response
+        String extractedData = firstResponse.jsonPath().getString("data.fieldName");
+
+        // Step 3: Store the extracted data
+
+        // Step 4: Construct the second API request
+        Response secondResponse = RestAssured.given()
+                .param("paramName", extractedData)
+                .post("https://api.example.com/second");
+
+        // Perform assertions or extract information from the second API response
+        // ...
+    }
+}
+
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class AccessTokenExample {
+    public static void main(String[] args) {
+        // Step 2: Make an HTTP request to the authentication endpoint
+        Response response = RestAssured.given()
+                .formParam("username", "your_username")
+                .formParam("password", "your_password")
+                .post("https://api.example.com/authenticate");
+
+        // Step 3: Extract the access token from the response
+        String accessToken = response.jsonPath().getString("access_token");
+
+        // Step 4: Store the access token for subsequent requests
+        // You can use the token in your API calls by adding it to the Authorization header
+        String authorizationHeader = "Bearer " + accessToken;
+        RestAssured.given()
+                .header("Authorization", authorizationHeader)
+                .get("https://api.example.com/some-endpoint")
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+String baseUrl = "https://example.com/api/auth";
+String body = "{\"username\": \"your_username\", \"password\": \"your_password\"}";
+
+Response response = RestAssured.given()
+    .baseUri(baseUrl)
+    .header("Content-Type", "application/json")
+    .body(body)
+    .post();
+
+String token = response.jsonPath().getString("token");
+
+System.out.println("Bearer Token: " + token);
+// or store it in a string variable for later use
+String bearerToken = "Bearer " + token;
+
+
+  List<WebElement> elements = driver.findElements(By.xpath("your_xpath_expression"));
+        Random rand = new Random();
+        WebElement randomElement = elements.get(rand.nextInt(elements.size()));
+
+        // Extract the text from the selected element
+        String textData = randomElement.getText();
+        System.out.println("Text data: " + textData);
+
+        // Quit the WebDriver
+  
+
+
+  driver.quit();
+  
+  
+EQUIPMENT / CAPEX PURCHASE
+deepak 2
+Credit
+10 days
+Within 75 Days
+Mali
+Kidal
+Kidal
+By Road
+Euro
+Jyothika
+
+
+
+package demo;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class ERRegistration {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.driver.geckodriver", "C:\\New folder\\firefox\\geckodriver.exe ");
+		WebDriver driver = new FirefoxDriver();
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.get("http://192.168.49.54/Vhealth/MainScreen/vHealthMainMenu.aspx");
+		driver.findElement(By.id("LinkLogin")).click();
+		 WebElement userid =driver.findElement(By.id("txtUserName"));
+		 userid.click();
+		 userid.sendKeys("charaksupport");
+		 WebElement password=driver.findElement(By.id("txtPwd"));
+		 password.click();
+		 password.sendKeys("charak");
+		 driver.findElement(By.id("btnLogin")).click();
+		 driver.findElement(By.xpath("//*[@id=\'ext-gen14']")).click();
+		 driver.findElement(By.xpath("//*[@id=\'td1']")).click();
+		 driver.switchTo().frame(0);
+		 Thread.sleep(2000);
+		 driver.findElement(By.cssSelector(".col-xl-4:nth-child(4) > #menu1")).click();
+		 driver.findElement(By.linkText("ER Visit")).click();
+		  driver.switchTo().defaultContent();
+		  driver.findElement(By.id("ext-gen30")).click();
+		  driver.switchTo().frame(0);
+		  driver.findElement(By.id("ddlPatientPrefix")).click();
+		  WebElement prefixdrdn=driver.findElement(By.id("ddlPatientPrefix"));
+		  prefixdrdn.findElement(By.xpath("//option[. = 'MR.']")).click();
+		  driver.findElement(By.id("txtPatientFirstname")).sendKeys("Raaj");
+		  driver.findElement(By.id("txtAddress1")).sendKeys("Hyderabad");    
+		  driver.findElement(By.id("txtContactNo")).sendKeys("7115631234");
+		    WebElement Phydrop = driver.findElement(By.id("ddlERPhy"));
+		       Select options= new Select(Phydrop);
+		       options.selectByIndex(2);
+		                     WebElement MatStatus = driver.findElement(By.id("ddlMartialStatus"));
+		                          Select mats = new Select(MatStatus);
+		                          mats.selectByIndex(2);
+		  driver.findElement(By.id("txtAge")).sendKeys("25");
+		  driver.findElement(By.id("rbtnNo")).click();
+	      driver.findElement(By.id("btnSave")).click(); 
+	      Thread.sleep(2000);
+	      driver.switchTo().window("ext-comp-1001");
+//	      driver.switchTo().defaultContent();
+	      driver.switchTo().frame("ext-comp-1001");
+	      driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div/div/div/div/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]")).click();
+	     
+	     // driver.switchTo().frame(2);
+	    //driver.findElement(By.xpath("//[@id=\'ext-gen14']")).click();
+	    //driver.findElement(By.id("ext-gen12")).click();
+	   // driver.switchTo().defaultContent();
+//	    driver.findElement(By.id("ext-gen14")).click();
+	}
+}
+
+
+
+
+driver.findElement(By.id("stores")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newGRNImg")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("purchase-order-number")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("purchase-order-number-option-1")).click();
+		Thread.sleep(2000);
+		WebElement invoice=driver.findElement(By.id("invoice-number"));
+		invoice.click();
+		invoice.sendKeys("154143519");
+		Thread.sleep(2000);
+		driver.findElement(By.id("invoice-date")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@aria-label='June 1, 2023']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("received-store")).click();
+		Thread.sleep(2000);
+		
+		List<WebElement> recstore = driver.findElements(By.xpath("//*[@id='received-store-panel']//mat-option"));
+		Random random = new Random();
+		int recstoreindex = random.nextInt(recstore.size());
+		WebElement recstorerandomElement = recstore.get(recstoreindex);
+		recstorerandomElement.click();
+		String receivedstore = recstorerandomElement.getText();
+		System.out.println(receivedstore);
+		
+		WebElement storecap= driver.findElement(By.id("store-capacity"));
+		String storecapacity = storecap.getAttribute("value");
+		System.out.println("number=" +storecapacity); Thread.sleep(2000);
+
+		WebElement avaliablecap= driver.findElement(By.id("store-available-capacity"));
+		String availablecapacity = avaliablecap.getAttribute("value");
+		System.out.println("number=" +availablecapacity); 
+		Thread.sleep(2000);
+		
+		WebElement itemrec= driver.findElement(By.id("item-yet-to-receive-NaN"));
+		String itemyettoreceiveNaN = itemrec.getAttribute("value");
+		System.out.println("number=" +itemyettoreceiveNaN); 
+		Thread.sleep(2000);
+		
+	
+		try {
+            int intValue = Integer.parseInt(itemyettoreceiveNaN);
+            System.out.println("The value is an integer: " + intValue);
+           
+            DecimalFormat decimalFormat = new DecimalFormat("#.#");
+            double dividedValue = intValue / 4;
+            String formattedValue = decimalFormat.format(dividedValue);
+            System.out.println("The value is an integer: " + dividedValue);
+            
+            
+            
+        } catch (NumberFormatException e) {
+            try {
+                double doubleValue = Double.parseDouble(itemyettoreceiveNaN);
+                System.out.println("The value is a double: " + doubleValue);
+               
+                DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                double dividedValue = doubleValue / 4;
+                String formattedValue = decimalFormat.format(dividedValue);
+                System.out.println("The value is an integer: " + dividedValue);
+            } catch (NumberFormatException ex) {
+                System.out.println("The value is neither an integer nor a double.");
+            }
+        }
+
+		driver.findElement(By.id("pr-number-date-1")).click();
+		Thread.sleep(2000);
+		for (int i=1;i<=3;i++){
+			WebElement reqqty = driver.findElement(By.id("item-req-qty-"+i));
+			double reqqtyvalue = Double.valueOf(reqqty.getAttribute("value"));
+			System.out.println("number=" +reqqtyvalue);
+			WebElement appqty = driver.findElement(By.id("item-approved-qty-"+i));
+			appqty.clear();
+			double approvedqty = new Random().nextDouble() * reqqtyvalue;
+			appqty.sendKeys(String.format("%.2f",approvedqty));
+			Thread.sleep(5000);	
+		}
+		for (int i=1;i<=3;i++){
+			driver.findElement(By.id("select-item-"+i)).click();	
+			Thread.sleep(2000);
+		}
+		WebElement indentid1= driver.findElement(By.id("indentPurposeId"));
+		String enteredText1 = indentid1.getText();		System.out.println("number=" +enteredText1);
+		driver.findElement(By.id("approve-btn")).click();	
+		Thread.sleep(2000);
+		driver.findElement(By.id("stores")).click();
+		Thread.sleep(2000);
+		if (enteredText1.equals("In-house Usage")) {
+			driver.findElement(By.id("itemIssuance")).click();	
+			Thread.sleep(2000);
+			WebElement indentnumber = driver.findElement(By.id("indent-number"));
+			Actions a=new Actions(driver);
+			indentnumber.click();
+			a.keyDown(Keys.ENTER).click().perform();
+			Thread.sleep(2000);
+			driver.findElement(By.id("reset-btn")).click();
+			Thread.sleep(2000);
+			singleitemisuuance(driver);	Thread.sleep(2000);
+			WebElement checkingindnum = driver.findElement(By.id("indent-number"));
+			Actions a2=new Actions(driver);checkingindnum.click();
+			a2.keyDown(Keys.ENTER).click().perform();Thread.sleep(2000);
+			String indtnum=checkingindnum.getText();
+			System.out.println(indtnum);
+			Thread.sleep(2000);
+			for (int i=1;i<=3;i++){
+				driver.findElement(By.id("purchase")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.id("purchaseRequisitionImg")).click();
+				Thread.sleep(2000);
+				WebElement indentnumid= driver.findElement(By.id("item-indent-number-1"));
+				String indentnumberid = indentnumid.getAttribute("value");
+				System.out.println("number=" +indentnumberid); Thread.sleep(2000);
+				WebElement indenttypeid1= driver.findElement(By.id("item-indent-purpose-1"));
+				String indent = indenttypeid1.getText();
+				System.out.println("number=" +indent); 
+				Thread.sleep(2000);
+				if(enteredText1.equals(indent) && indtnum.equals(indentnumberid)) {				
+					singleprandpo(driver,i);
+				}
+			}
+//			driver.findElement(By.id("stores")).click();
+//			Thread.sleep(2000);
+//			driver.findElement(By.id("itemIssuance")).click();	
+//			Thread.sleep(2000);
+//			mutipleitemisuuance(driver);
+//			Thread.sleep(2000);
+			
+			
+			driver.findElement(By.id("purchase")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.id("purchaseRequisitionImg")).click();
+			Thread.sleep(2000);
+			mutipleprandpo(driver);
+			
+				}else if (enteredText1.equals("External Sales")) {
+			Thread.sleep(2000);
+			driver.findElement(By.id("customerIssuanceImg")).click();
+			Thread.sleep(2000);
+			WebElement indentnumber1 = driver.findElement(By.id("indent-number"));
+			Actions a1=new Actions(driver);
+			indentnumber1.click();
+			a1.keyDown(Keys.ENTER).click().perform();
+			Thread.sleep(2000);
+			driver.findElement(By.id("reset-btn")).click();
+			Thread.sleep(2000);
+			singlecustomerisuuance(driver);	Thread.sleep(2000);
+			WebElement checkingindnum = driver.findElement(By.id("indent-number"));
+			Actions a2=new Actions(driver);checkingindnum.click();
+			a2.keyDown(Keys.ENTER).click().perform();Thread.sleep(2000);
+			String indtnum=checkingindnum.getText();
+			System.out.println(indtnum);
+			Thread.sleep(2000);
+			for (int i=1;i<=3;i++){
+				driver.findElement(By.id("purchase")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.id("purchaseRequisitionImg")).click();
+				Thread.sleep(2000);
+				WebElement indentnumid= driver.findElement(By.id("item-indent-number-1"));
+				String indentnumberid = indentnumid.getAttribute("value");
+				System.out.println("number=" +indentnumberid); Thread.sleep(2000);
+				WebElement indenttypeid1= driver.findElement(By.id("item-indent-purpose-1"));
+				String indent = indenttypeid1.getText();
+				System.out.println("number=" +indent); 
+				Thread.sleep(2000);
+				if(enteredText1.equals(indent) && indtnum.equals(indentnumberid)) {				
+					singleprandpo(driver,i);
+				}
+			}
+				}
+//			driver.findElement(By.id("stores")).click();
+//			Thread.sleep(2000);
+//			driver.findElement(By.id("customerIssuanceImg")).click();
+//			Thread.sleep(2000);
+//			mutiplecustomerisuuance(driver);
+//			Thread.sleep(2000);
+			
+			driver.findElement(By.id("purchase")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.id("purchaseRequisitionImg")).click();
+			Thread.sleep(2000);
+			mutipleprandpo(driver);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	import java.util.Random;
+
+public class RandomNumberGenerator {
+    public static void main(String[] args) {
+        Random random = new Random();
+        
+        for (int i = 1; i <= 3; i++) {
+            if (i == 1) {
+                int randomNumber = random.nextInt();
+                System.out.println("Integer: " + randomNumber);
+            } else if (i == 2) {
+                double randomNumber = random.nextDouble();
+                System.out.println("Double: " + randomNumber);
+            } else if (i == 3) {
+                float randomNumber = random.nextFloat();
+                System.out.println("Float: " + randomNumber);
+            }
+        }
+    }
+}
+
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.Random;
+System.setProperty("webdriver.chrome.driver", "path_to_chromedriver");
+WebDriver driver = new ChromeDriver();
+driver.get("your_application_url");
+String[] items = {"item1", "item2", "item3", "item4", "item5"};
+Random random = new Random();
+
+for (String item : items) {
+    int dataType = random.nextInt(5);  // Generate a random number between 0 and 4
+
+    switch (dataType) {
+        case 0:  // String
+            String stringValue = "RandomString" + random.nextInt(100);
+            // Enter the string value into the field associated with the item
+            driver.findElement(By.id(item)).sendKeys(stringValue);
+            break;
+            
+        case 1:  // Integer
+            int intValue = random.nextInt(100);
+            // Convert the integer value to string and enter it into the field
+            driver.findElement(By.id(item)).sendKeys(String.valueOf(intValue));
+            break;
+            
+        case 2:  // Double
+            double doubleValue = random.nextDouble() * 100;
+            // Convert the double value to string and enter it into the field
+            driver.findElement(By.id(item)).sendKeys(String.valueOf(doubleValue));
+            break;
+            
+        case 3:  // Boolean
+            boolean booleanValue = random.nextBoolean();
+            // Convert the boolean value to string and enter it into the field
+            driver.findElement(By.id(item)).sendKeys(String.valueOf(booleanValue));
+            break;
+            
+        case 4:  // Date
+            // Generate a random date value using your preferred method or library
+            // Enter the date value into the field associated with the item
+            driver.findElement(By.id(item)).sendKeys("2023-06-07");
+            break;
+    }
+}
+driver.quit();
+//	@Test(priority = 1)
+//	void creatinguser(){
+//		 HashMap data = new HashMap();
+//		 
+//		 data.put("name", "vahin");
+//		 data.put("job", "se");
+//		 
+//		 given()
+//		 .contentType("application/json")
+//		 .body(data)
+//		 .when ()
+//		.post("https://reqres.in/api/users2")
+//		.then()
+//		.statusCode(201)
+//		.log().all();
+//}
+
+HOW TO GET THE TEXT FILED COLOR ELEMENT IN SELENIUM WEB DRIVER JAVA
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TextColorVerification {
+
+    public static void main(String[] args) {
+
+        // Set the path of the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver.exe");
+
+        // Create a new instance of the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website where the text to be verified is present
+        driver.get("https://example.com");
+
+        // Find the element that contains the text to be verified
+        WebElement textElement = driver.findElement(By.xpath("//div[@class='example-class']"));
+
+        // Get the CSS value of the color property of the text element
+        String colorValue = textElement.getCssValue("color");
+
+        // Verify that the color of the text is the expected color
+        if (colorValue.equals("rgba(255, 0, 0, 1)")) {
+            System.out.println("Text color is red");
+        } else {
+            System.out.println("Text color is not red");
+        }
+
+        // Close the browser
+        driver.quit();
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
